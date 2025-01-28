@@ -1,0 +1,50 @@
+/* src/styles/global.css */
+
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Quicksand', serif;
+    line-height: 1.6;
+    background-color: #FFFDEC;
+    color: #333;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+ /* Parent container (flex) */
+ .top-root {
+    width: 100%;
+    align-items: center; 
+    min-height: 100vh;
+  }
+  
+  /* The "container" class – remove forced width */
+  .container {
+    /* Don't use width: 100% */
+    margin-left: auto;
+    margin-right: auto;
+    /* Optional padding */
+    padding: 1rem;
+  }
+  
+  /* Tailwind-like breakpoints for max-width */
+  @media (min-width: 640px) {
+    .container {
+      max-width: 640px;
+    }
+  }
+  @media (min-width: 768px) {
+    .container {
+      max-width: 768px;
+    }
+  }
+  @media (min-width: 1024px) {
+    .container {
+      max-width: 1024px;
+    }
+  }
+  

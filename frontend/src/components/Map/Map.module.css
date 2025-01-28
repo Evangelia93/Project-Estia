@@ -1,0 +1,25 @@
+
+.map {
+  width: 100%; 
+  max-width: 900px; 
+  height: 400px; 
+  border: 3px solid #93B795; 
+  border-radius: 12px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  margin: 20px auto; 
+}
+
+#map {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .map {
+    height: 300px; 
+    max-width: 100%; 
+    border-radius: 10px;
+  }
+}

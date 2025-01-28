@@ -1,0 +1,26 @@
+/* src/styles/list-map.css */
+
+.list-container {
+    padding: 20px;
+    margin: 10px;
+    width: 48%;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    float: left;
+}
+
+.map-container {
+    padding: 20px;
+    margin: 10px;
+    width: 48%;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    float: right;
+}
+
+.list-container h2, .map-container h2 {
+    font-family: 'Quicksand', serif;
+    color: #93B795;
+}
