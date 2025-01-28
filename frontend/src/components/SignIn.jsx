@@ -1,11 +1,43 @@
 import React, { useState } from 'react';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
-import '../styles/modal.css'; 
+import '../styles/modal.css';
 import user from "../assets/user.png";
+import axios from 'axios';
 
 function SignIn() {
-  const [isSignIn, setIsSignIn] = useState(true); 
+  const [isSignIn, setIsSignIn] = useState(true);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');  // Success message state
+
+  // Handle SignIn
+  const handleSignIn = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post('http://estiaproject-b3ef95234cdd.herokuapp.com/api/v1/auth/login', {
+        email,
+        password,
+      });
+
+      console.log('Login successful:', response.data);
+      setSuccessMessage('Login successful!'); // Set the success message
+      setError(''); // Clear any previous error messages
+
+      // Here you would typically store the JWT token and user info in the state or localStorage
+
+    } catch (err) {
+      console.error('Login error:', err);
+      if (err.response) {
+        setError(err.response.data.error);
+      } else {
+        setError('Internal Server Error');
+      }
+      setSuccessMessage('');  // Clear success message on error
+    }
+  };
+
   return (
     <div>
       <Popup
@@ -32,15 +64,17 @@ function SignIn() {
             </span>
             {isSignIn ? (
               <>
-                {/* Sign In Form */}
                 <h4 className="heading">Sign In</h4>
-                <form>
+                <form onSubmit={handleSignIn}>
                   <label htmlFor="email">E-Mail</label>
                   <input
                     type="email"
                     id="email"
                     placeholder="Enter your email"
                     className="searchbox-input"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
                   />
                   <label htmlFor="password">Password</label>
                   <input
@@ -48,7 +82,12 @@ function SignIn() {
                     id="password"
                     placeholder="Enter your password"
                     className="searchbox-input"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
                   />
+                  {error && <p style={{ color: 'red' }}>{error}</p>}
+                  {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>} {/* Display success message */}
                   <button type="submit" className="searchbox-button">
                     Sign In
                   </button>
@@ -58,7 +97,7 @@ function SignIn() {
                   Don't have an account?{' '}
                   <a
                     href="#"
-                    onClick={() => setIsSignIn(false)} 
+                    onClick={() => setIsSignIn(false)}
                   >
                     Sign Up
                   </a>
@@ -66,7 +105,6 @@ function SignIn() {
               </>
             ) : (
               <>
-                {/* Sign Up Form */}
                 <h4 className="heading">Sign Up</h4>
                 <form>
                   <label htmlFor="name">Name</label>

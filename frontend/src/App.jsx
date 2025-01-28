@@ -1,23 +1,24 @@
-
 import { useMemo } from 'react';
-import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
 import Home from './pages/Home';
 import Details from './pages/Details';
-import About from "./pages/About"
-import Forum from "./components/Forum"
+import About from "./pages/About";
+import Forum from "./components/Forum";
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import { useBusinessAddresses } from './hooks/useBusinessAddresses';
 import { useBusinessData } from './hooks/useBusinessData';
 import PopularCategories from './components/PopularCategories';
 
+// Import SignIn and SignUp components
+import SignIn from './components/SignIn';
+import SignUp from './components/SignUp';
 
 function Layout() {
   return (
     <div className="top-root">
       <div className="container">
         <NavBar />
-     
       </div>
       <div className="container">
         <Outlet />
@@ -26,7 +27,6 @@ function Layout() {
     </div>
   );
 }
-
 
 function App() {
   const { businessAddreses, isLoading: isBusinessAddressLoading, hasError: hasBusinessAdrressError } = useBusinessAddresses();
@@ -48,22 +48,26 @@ function App() {
   }).filter((item) => item !== null), [businessAddreses, businessData]);
 
   if (isBusinessAddressLoading || isBusinessLoading) {
-    return <p>Loading...</p>
+    return <p>Loading...</p>;
   }
 
   if (hasBusinessAdrressError || hasBusinessError) {
-    return <p>Something went wrong. please try again</p>
+    return <p>Something went wrong. Please try again.</p>;
   }
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<Layout />}>
+        <Route path="/" element={<Layout />}>
           <Route index element={<Home businessData={combinedData} />} />
           <Route path="details" element={<Details combinedData={combinedData} />} />
           <Route path="about" element={<About />} />
           <Route path="forum" element={<Forum combinedData={combinedData} />} />
-          <Route path="popularcategories" element={<PopularCategories combinedData={combinedData}/>} />
+          <Route path="popularcategories" element={<PopularCategories combinedData={combinedData} />} />
+          
+          {/* Add routes for SignIn and SignUp */}
+          <Route path="signin" element={<SignIn />} />
+          <Route path="signup" element={<SignUp />} />
         </Route>
       </Routes>
     </BrowserRouter>
