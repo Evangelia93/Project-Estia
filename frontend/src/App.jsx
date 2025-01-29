@@ -9,9 +9,7 @@ import Footer from './components/Footer';
 import { useBusinessAddresses } from './hooks/useBusinessAddresses';
 import { useBusinessData } from './hooks/useBusinessData';
 import PopularCategories from './components/PopularCategories';
-// import SearchResults from './components/SearchResults';
-import Businesses from './components/Businesses';
-
+import ListContainer from './pages/ListContainer';
 
 function Layout() {
   return (
@@ -64,7 +62,7 @@ function App() {
           <Route path="about" element={<About />} />
           <Route path="forum" element={<Forum combinedData={combinedData} />} />
           <Route path="popularcategories" element={<PopularCategories combinedData={combinedData}/>} />
-          <Route path="businesses" element={<Businesses combinedData={combinedData} />} />        
+          <Route path="listcontainer" element={<ListContainer combinedData={combinedData} />} />        
         </Route>
       </Routes>
     </BrowserRouter>

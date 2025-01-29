@@ -61,11 +61,13 @@ import "reactjs-popup/dist/index.css";
 import "../styles/modal.css"; // Ίδιο στυλ με το FilterModal
 import FilterModal from "./FilterModal";
 import SortBy from "./SortBy";
+import { useNavigate } from "react-router-dom"; // Προσθήκη useNavigate για πλοήγηση
 
 function SearchBox({ onSearch }) {
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
   const [isSortByModalOpen, setIsSortByModalOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+  const navigate = useNavigate(); // Χρησιμοποιούμε useNavigate για αλλαγή σελίδας
 
   const toggleFilterModal = () => {
     setIsFilterModalOpen((prev) => !prev);
@@ -75,9 +77,10 @@ function SearchBox({ onSearch }) {
     setIsSortByModalOpen((prev) => !prev);
   };
 
+  
   const handleSearch = () => {
-    if (onSearch) {
-      onSearch(searchTerm); // Στέλνουμε τον όρο αναζήτησης στο parent component
+    if (searchTerm.trim() !== "") {
+      navigate(`/listcontainer?search=${encodeURIComponent(searchTerm)}`); // Μεταφορά στη σελίδα με το search term στο URL
     }
   };
 

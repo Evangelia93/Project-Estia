@@ -13,6 +13,8 @@ export const useBusinessData = () => {
     setHasError(false)
     try {
       const businesses = await fetchBusinesses();
+      console.log("Fetched businesses:", businesses); // ✅ Δες αν επιστρέφει δεδομένα
+
       setBusinessData(businesses)
       
     } catch (error) {
