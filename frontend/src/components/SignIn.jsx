@@ -22,10 +22,9 @@ function SignIn() {
       });
 
       console.log('Login successful:', response.data);
-      setSuccessMessage('Login successful!'); // Set the success message
-      setError(''); // Clear any previous error messages
+      setSuccessMessage('Login successful!'); 
+      setError(''); 
 
-      // Here you would typically store the JWT token and user info in the state or localStorage
 
     } catch (err) {
       console.error('Login error:', err);
@@ -34,7 +33,7 @@ function SignIn() {
       } else {
         setError('Internal Server Error');
       }
-      setSuccessMessage('');  // Clear success message on error
+      setSuccessMessage('');  
     }
   };
 
@@ -87,7 +86,7 @@ function SignIn() {
                     required
                   />
                   {error && <p style={{ color: 'red' }}>{error}</p>}
-                  {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>} {/* Display success message */}
+                  {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
                   <button type="submit" className="searchbox-button">
                     Sign In
                   </button>

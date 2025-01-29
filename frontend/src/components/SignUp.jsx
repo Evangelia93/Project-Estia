@@ -6,7 +6,7 @@ import user from "../assets/user.png";
 import axios from 'axios';
 
 function SignUp() {
-  const [name, setName] = useState('');
+  const [username, setUsername] = useState(''); // Changed from 'name' to 'username'
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -16,24 +16,30 @@ function SignUp() {
   const handleSignUp = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://estiaproject-b3ef95234cdd.herokuapp.com/api/v1/auth/register', {
-        name,
+      const response = await axios.post('https://estiaproject-b3ef95234cdd.herokuapp.com/api/v1/register', {
+        username, // Changed from 'name' to 'username'
         email,
         password,
       });
 
-      console.log('SignUp successful:', response.data);
+      // Debugging: Log the response to see the data structure
+      console.log('Response:', response); 
+      console.log('Response Data:', response.data);
+
       setSuccessMessage('Sign Up successful! You can now log in.'); // Set the success message
-      setError(''); // Clear any previous error messages
+      setError(''); // Clear the error message
 
     } catch (err) {
       console.error('SignUp error:', err);
+
+      // Check if there's a response from the API with an error message
       if (err.response) {
-        setError(err.response.data.error);
+        setError(err.response.data.error); // Set error if any error response is received
       } else {
         setError('Internal Server Error');
       }
-      setSuccessMessage('');  // Clear success message on error
+
+      setSuccessMessage(''); // Clear success message on error
     }
   };
 
@@ -63,14 +69,14 @@ function SignUp() {
             </span>
             <h4 className="heading">Sign Up</h4>
             <form onSubmit={handleSignUp}>
-              <label htmlFor="name">Name</label>
+              <label htmlFor="username">Username</label> {/* Changed label from 'name' to 'username' */}
               <input
                 type="text"
-                id="name"
-                placeholder="Enter your name"
+                id="username"
+                placeholder="Enter your username"
                 className="searchbox-input"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
                 required
               />
               <label htmlFor="email">E-Mail</label>
