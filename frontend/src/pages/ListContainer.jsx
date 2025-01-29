@@ -20,43 +20,55 @@ import img12 from "../assets/cafe_spots/12.jpeg";
 const images = [img1, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11, img12];
 
 function ListContainer() {
-  const { businessData, isLoading, hasError } = useBusinessData(); 
+  const { businessData, isLoading, hasError } = useBusinessData();
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const searchTerm = queryParams.get("search")?.toLowerCase() || ""; 
+  const searchTerm = queryParams.get("search")?.toLowerCase() || "";
+  const sortOption = queryParams.get("sort") || "";
 
   const [filteredBusinesses, setFilteredBusinesses] = useState([]);
 
   useEffect(() => {
-    console.log("Business Data from Hook:", businessData); 
-    console.log("Search Term:", searchTerm);
+    if (!businessData) return;
 
-    if (businessData && businessData.length > 0) {
-      const businessesWithImages = businessData.map((business, index) => ({
-        ...business,
-        imageUrl: images[index % images.length],
-      }));
+    let businessesWithImages = businessData.map((business, index) => ({
+      ...business,
+      imageUrl: images[index % images.length],
+    }));
 
-      const matchingBusinesses = businessesWithImages.filter((business) =>
+    if (searchTerm.trim()) {
+      businessesWithImages = businessesWithImages.filter((business) =>
         business.name.toLowerCase().includes(searchTerm)
       );
-
-      setFilteredBusinesses(matchingBusinesses);
     }
-  }, [businessData, searchTerm]);
 
-  if (isLoading) {
-    return <p>Loading businesses...</p>;
-  }
+    if (sortOption) {
+      businessesWithImages.sort((a, b) => {
+        if (sortOption === "top-reviews") {
+          return b.rating - a.rating; 
+        }
+        if (sortOption === "price-ascending") {
+          return a.price - b.price; 
+        }
+        if (sortOption === "price-descending") {
+          return b.price - a.price; 
+        }
+        if (sortOption === "az") {
+          return a.name.localeCompare(b.name); 
+        }
+        return 0;
+      });
+    }
 
-  if (hasError) {
-    return <p>Error loading businesses.</p>;
-  }
+    setFilteredBusinesses(businessesWithImages);
+  }, [businessData, searchTerm, sortOption]);
+
+  if (isLoading) return <p>Loading businesses...</p>;
+  if (hasError) return <p>Error loading businesses.</p>;
 
   return (
     <div style={styles.pageContainer}>
       <SearchBox />
-   
       <div style={styles.businessesContainer}>
         {filteredBusinesses.length > 0 ? (
           filteredBusinesses.map((business, index) => (
@@ -70,6 +82,8 @@ function ListContainer() {
                 <p style={styles.businessAddress}>
                   <b>Address:</b> {business.road_name}, {business.city}
                 </p>
+                <p><b>Rating:</b> {business.rating}</p>
+                <p><b>Price:</b> {business.price ? `$${business.price}` : "N/A"}</p>
               </div>
               <div style={styles.buttonContainer}>
                 <HeartButton business={business} />
@@ -92,10 +106,9 @@ const styles = {
     gap: '15px',
     width: '50%',
     maxWidth: '800px',
-    justifyContent: 'center',
     padding: '0px',
     marginLeft:"300px",
-   
+    height:"400vh"
   },
   businessCard: {
     display: 'flex',

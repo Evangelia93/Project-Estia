@@ -1,32 +1,5 @@
 import { useState } from 'react';
 import Map from './Map';
-import Slideshow from './Slideshow';
-// import SearchBox from '../components/SearchBox';
-
-
-// function Details({ combinedData }) {
-//   const [currentIndex, setCurrentIndex] = useState(null)
-
-//   return (
-//     <>
-//     <SearchBox/>
-//       <div className="App">
-//         <Slideshow
-//           combinedData={combinedData}
-//           currentIndex={currentIndex}
-//           setCurrentIndex={setCurrentIndex}
-//         />
-//         {!!combinedData && <Map
-//           selectedLocation={currentIndex ? [combinedData[currentIndex].latitude, combinedData[currentIndex].longitude] : null}
-//           setCurrentIndex={setCurrentIndex}
-//           combinedData={combinedData}
-//         />}
-//       </div>
-//     </>
-//   );
-// }
-
-// export default Details;
 import HeartButton from './HeartButton';
 import StarButton from './StarButton';
 import img1 from '../assets/cafe_spots/1.jpeg';
@@ -47,7 +20,7 @@ function Details({ combinedData }) {
 
   const businessesWithImages = combinedData.map((business, index) => ({
     ...business,
-    imageUrl: images[index % images.length], // Περιοδικότητα για τις εικόνες
+    imageUrl: images[index % images.length], 
   }));
 
   return (
@@ -72,7 +45,6 @@ function Details({ combinedData }) {
                   <b>Address:</b> {business.road_name}, {business.city}
                 </p>
               </div>
-              {/* Προσθήκη κουμπιών */}
               <div className="button-container">
                 <HeartButton business={business} />
                 <StarButton business={business} />

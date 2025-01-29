@@ -4,7 +4,6 @@ import RatingBar from "./RatingBar";
 import FilterCheckboxes from "./CheckBoxesFilter";
 
 function FilterModal({ onClose, onApply }) {
-  // State για όλα τα φίλτρα
   const initialFilters = {
     postalCode: "",
     rating: 0,
@@ -25,12 +24,10 @@ function FilterModal({ onClose, onApply }) {
 
   const [filters, setFilters] = useState(initialFilters);
 
-  // Reset Filters
   const handleReset = () => {
-    setFilters(initialFilters); // Επαναφέρει όλα τα φίλτρα στις αρχικές τιμές
+    setFilters(initialFilters); 
   };
 
-  // Ενημέρωση φίλτρων για checkboxes
   const handleCheckboxChange = (updatedCheckboxes) => {
     setFilters((prev) => ({
       ...prev,
@@ -46,7 +43,6 @@ function FilterModal({ onClose, onApply }) {
         </span>
         <h4>Filter Options</h4>
 
-        {/* Rating Bar */}
         <div>
           <RatingBar
             rating={filters.rating}
@@ -56,7 +52,6 @@ function FilterModal({ onClose, onApply }) {
 
         <hr />
 
-        {/* Postal Code Filter */}
         <label htmlFor="postal_code">Postal Code:</label>
         <select
           id="postal_code"
@@ -75,7 +70,6 @@ function FilterModal({ onClose, onApply }) {
 
         <hr />
 
-        {/* Checkboxes */}
         <FilterCheckboxes
           values={filters.checkboxes}
           onChange={handleCheckboxChange}
@@ -83,7 +77,6 @@ function FilterModal({ onClose, onApply }) {
 
         <hr />
 
-        {/* Buttons */}
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <button onClick={() => onApply(filters)} className="apply-button">
             Apply

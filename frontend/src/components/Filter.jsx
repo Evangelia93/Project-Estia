@@ -16,7 +16,6 @@ function Filter({ onApply }) {
     <div>
       <h4>Filter Options</h4>
 
-      {/* Rating Stars */}
       <div id="rating_bar">
         {Array.from({ length: 5 }).map((_, index) => (
           <span
@@ -37,7 +36,6 @@ function Filter({ onApply }) {
 
       <hr />
 
-      {/* Postal Code Filter */}
       <label htmlFor="postal_code">Postal Code:</label>
       <select
         id="postal_code"
@@ -53,7 +51,6 @@ function Filter({ onApply }) {
 
       <hr />
 
-      {/* Apply Button */}
       <button onClick={() => onApply(rating, postalCode)}>Apply</button>
     </div>
   );

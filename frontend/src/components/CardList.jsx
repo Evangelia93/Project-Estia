@@ -1,23 +1,3 @@
-// // eslint-disable-next-line react/prop-types
-// function Card({ businesses }) {
-//   return (
-//     <div>
-//       {businesses && businesses.length ? (
-//         businesses.map((business, index) => (
-//           <div key={business.id + business.name}>
-//             <h3>{business.name}</h3>
-//             <p>{business.description}</p>
-//           </div>
-//         ))
-//       ) : (
-//         <p>No businesses available.</p>
-//       )}
-//     </div>
-//   );
-// }
-
-// export default Card;
-
 import React, { useMemo } from 'react';
 import HeartButton from './HeartButton';
 import StarButton from './StarButton';
@@ -38,7 +18,7 @@ import "../styles/styles.css"
 const localImages = [img1, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11, img12];
 
 const CardList = ({ combinedData }) => {
-  console.log("Data received in VerticalCardList:", combinedData); // Έλεγχος δεδομένων
+  console.log("Data received in VerticalCardList:", combinedData); 
 
   if (!combinedData || combinedData.length === 0) {
     return <p>No data available</p>;

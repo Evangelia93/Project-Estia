@@ -1,11 +1,7 @@
-/* Filter.module.css */
-
-/* General styling for the filter component */
 .filterContainer {
     font-family: Arial, sans-serif;
   }
   
-  /* Rating Stars */
   .star {
     font-size: 24px;
     cursor: pointer;
@@ -17,7 +13,6 @@
     color: #ffd700;
   }
   
-  /* Postal Code Dropdown */
   select {
     padding: 8px;
     margin-top: 10px;
@@ -27,7 +22,6 @@
     border-radius: 4px;
   }
   
-  /* Apply Button */
   button {
     background-color: #007bff;
     color: white;

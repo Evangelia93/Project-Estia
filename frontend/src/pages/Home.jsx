@@ -27,11 +27,10 @@ function Home({ businessData }) {
     <div>
       <SearchBox onClick={toggleFilterModal} />
       <PopularCategories />
-      {/* Προσθήκη του Details κάτω από τις κατηγορίες */}
       {businessData && businessData.length > 0 ? (
         <Details combinedData={businessData} />
       ) : (
-        <p>No businesses found</p> // Αν δεν υπάρχουν δεδομένα
+        <p>No businesses found</p>
       )}
 
       {isFilterModalOpen && (

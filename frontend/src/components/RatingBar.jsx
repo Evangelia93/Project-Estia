@@ -4,20 +4,20 @@ import React, { useState } from "react";
 
 
 function RatingBar({ maxStars = 5, onRate }) {
-  const [hoveredRating, setHoveredRating] = useState(0); // Για hover
-  const [selectedRating, setSelectedRating] = useState(0); // Για επιλεγμένη βαθμολογία
+  const [hoveredRating, setHoveredRating] = useState(0); 
+  const [selectedRating, setSelectedRating] = useState(0);
 
   const handleMouseOver = (index) => {
-    setHoveredRating(index); // Ενημερώνει το hover rating
+    setHoveredRating(index); 
   };
 
   const handleMouseOut = () => {
-    setHoveredRating(0); // Reset όταν φεύγει το ποντίκι
+    setHoveredRating(0); 
   };
 
   const handleClick = (index) => {
-    setSelectedRating(index); // Αποθηκεύει τη βαθμολογία
-    if (onRate) onRate(index); // Στέλνει τη βαθμολογία μέσω callback
+    setSelectedRating(index); 
+    if (onRate) onRate(index); 
   };
 
   return (

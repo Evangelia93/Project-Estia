@@ -10,27 +10,27 @@ const categories = [
   {
     id: 1,
     name: "Outdoor Playground",
-    image: img1, // Εικόνα για την κατηγορία Cafes
+    image: img1, 
   },
   {
     id: 2,
     name: "Zoo-Farms",
-    image: img2, // Εικόνα για την κατηγορία Restaurants
+    image: img2, 
   },
   {
     id: 3,
     name: "Restaurants",
-    image: img3, // Εικόνα για την κατηγορία Playgrounds
+    image: img3, 
   },
   {
     id: 4,
     name: "Events",
-    image: img4, // Εικόνα για την κατηγορία Pet Friendly
+    image: img4, 
   },
   {
     id: 5,
     name: "Indoor Playground",
-    image: img5, // Εικόνα για την κατηγορία Parking
+    image: img5, 
   },
 ];
 
@@ -43,7 +43,7 @@ function PopularCategories({ onCategoryClick }) {
           <div
             key={category.id}
             className="category-card"
-            onClick={() => onCategoryClick(category.name)} // Κλήση όταν πατηθεί η κάρτα
+            onClick={() => onCategoryClick(category.name)}
           >
             <img src={category.image} alt={category.name} className="category-image" />
             <span className="category-name">{category.name}</span>

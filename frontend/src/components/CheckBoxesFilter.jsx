@@ -9,7 +9,6 @@ function FilterCheckboxes({ values = {}, onChange }) {
 
   return (
     <div>
-      {/* Meals */}
       <div className="filter-section">
         <h4>Meals</h4>
         <label>
@@ -61,7 +60,6 @@ function FilterCheckboxes({ values = {}, onChange }) {
 
       <hr />
 
-      {/* Playgrounds */}
       <div className="filter-section">
         <h4>Playgrounds</h4>
         <label>
@@ -86,7 +84,6 @@ function FilterCheckboxes({ values = {}, onChange }) {
 
       <hr />
 
-      {/* Features */}
       <div className="filter-section">
         <h4>Features</h4>
         <label>
