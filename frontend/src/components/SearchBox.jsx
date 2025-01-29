@@ -45,8 +45,7 @@ function SearchBox() {
           placeholder="Search..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          onKeyPress={(e) => e.key === "Enter" && handleSearch()}
-        />
+          onKeyDown={(e) => e.key === "Enter" && handleSearch()}        />
         <button className="searchbox-submit-button" onClick={handleSearch}>
           Submit
         </button>
