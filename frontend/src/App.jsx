@@ -2,7 +2,6 @@
 import { useMemo } from 'react';
 import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom'
 import Home from './pages/Home';
-import Details from './pages/Details';
 import About from "./pages/About"
 import Forum from "./components/Forum"
 import NavBar from './components/NavBar';
@@ -10,6 +9,8 @@ import Footer from './components/Footer';
 import { useBusinessAddresses } from './hooks/useBusinessAddresses';
 import { useBusinessData } from './hooks/useBusinessData';
 import PopularCategories from './components/PopularCategories';
+// import SearchResults from './components/SearchResults';
+import Businesses from './components/Businesses';
 
 
 function Layout() {
@@ -60,10 +61,10 @@ function App() {
       <Routes>
         <Route path='/' element={<Layout />}>
           <Route index element={<Home businessData={combinedData} />} />
-          <Route path="details" element={<Details combinedData={combinedData} />} />
           <Route path="about" element={<About />} />
           <Route path="forum" element={<Forum combinedData={combinedData} />} />
           <Route path="popularcategories" element={<PopularCategories combinedData={combinedData}/>} />
+          <Route path="businesses" element={<Businesses combinedData={combinedData} />} />        
         </Route>
       </Routes>
     </BrowserRouter>

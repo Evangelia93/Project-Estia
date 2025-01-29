@@ -1,25 +1,22 @@
-
 .map {
-  width: 100%; 
-  max-width: 900px; 
-  height: 400px; 
+  width: 100%; /* Πιάνει όλο το πλάτος του γονέα */
+  height: 100%; /* Πιάνει όλο το ύψος του γονέα */
   border: 3px solid #93B795; 
-  border-radius: 12px; 
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  overflow: hidden;
-  margin: 20px auto; 
+  
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Σκιά για εμφάνιση */
+  overflow: hidden; /* Απόκρυψη περιεχομένου που βγαίνει έξω */
 }
 
 #map {
-  display: flex;
-  align-items: center;
+  width: 100%;
+  height: 100%;
+  display: flex; 
+  align-items: center; 
   justify-content: center;
 }
 
 @media (max-width: 768px) {
   .map {
-    height: 300px; 
-    max-width: 100%; 
-    border-radius: 10px;
+    border-radius: 10px; /* Στρογγυλεμένες γωνίες για μικρές οθόνες */
   }
 }

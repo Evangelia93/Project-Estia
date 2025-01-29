@@ -1,18 +1,16 @@
 import { useState } from "react";
-import Businesses from "../components/Businesses.jsx";
-import { useBusinessData } from "../hooks/useBusinessData.jsx";
 import FilterModal from "../components/FilterModal.jsx";
 import SearchBox from "../components/SearchBox.jsx";
 import PopularCategories from "../components/PopularCategories.jsx";
-import MapContainer from "../components/MapContainer.jsx";
-import Map from "../components/Map/index.jsx";
-import "../styles/styles.css"
+import Details from "../components/Details.jsx";
+import "../styles/styles.css";
+
 
 function Home({ businessData }) {
+  
   console.log("Business Data:", businessData);
 
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
-
   const [feedbackMessage, setFeedbackMessage] = useState("");
 
   const toggleFilterModal = () => {
@@ -21,25 +19,21 @@ function Home({ businessData }) {
 
   const handleApplyFilters = () => {
     setFeedbackMessage("Filters applied!");
-    setTimeout(() => setFeedbackMessage(""), 3000); 
-    toggleFilterModal(); 
-
+    setTimeout(() => setFeedbackMessage(""), 3000);
+    toggleFilterModal();
   };
 
   return (
     <div>
       <SearchBox onClick={toggleFilterModal} />
       <PopularCategories />
-      <div className="content-container">
-        <div className="left-content">
-          <Businesses businesses={businessData} />
-        </div>
-        <div className="right-content">
-        
-          {/* <MapContainer /> */}
-        </div>
-      </div>
-      
+      {/* Προσθήκη του Details κάτω από τις κατηγορίες */}
+      {businessData && businessData.length > 0 ? (
+        <Details combinedData={businessData} />
+      ) : (
+        <p>No businesses found</p> // Αν δεν υπάρχουν δεδομένα
+      )}
+
       {isFilterModalOpen && (
         <FilterModal
           onClose={toggleFilterModal}
@@ -48,9 +42,7 @@ function Home({ businessData }) {
       )}
 
       {feedbackMessage && (
-        <div className="feedback-message">
-          {feedbackMessage}
-        </div>
+        <div className="feedback-message">{feedbackMessage}</div>
       )}
     </div>
   );

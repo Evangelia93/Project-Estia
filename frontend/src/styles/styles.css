@@ -1,7 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Quicksand', serif;
+
   }
  /* Global styles */
  
@@ -316,52 +320,80 @@
 
 /* SearchBox Styles */
 
+/* Wrapper για το SearchBox */
+.searchbox-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px; /* Κενό μεταξύ των τμημάτων */
+  margin-bottom: 40px;
+}
+
+/* Στυλ για το Search Input και το Submit Button */
 .searchbox-container {
   display: flex;
-  flex-direction: column; /* Τα στοιχεία θα τοποθετηθούν το ένα κάτω από το άλλο */
   align-items: center;
-  margin: 20px 0;
-  padding: 10px;
+  gap: 10px; /* Κενό ανάμεσα στο input και το κουμπί */
 }
 
 .searchbox-input {
-  width: 100%;
-  max-width: 400px;
+  width: 250px;
+  max-width: 700px;
   padding: 10px;
   font-size: 14px;
-  border: 2px solid #93b795; 
+  border: 2px solid #93B795;
   border-radius: 30px;
   outline: none;
   transition: border-color 0.3s ease;
-  margin-bottom: 10px; /* Κενό κάτω από τη γραμμή αναζήτησης */
 }
 
 .searchbox-input:focus {
   border-color: #769f7d;
 }
 
-.searchbox-buttons {
-  display: flex; /* Τα κουμπιά τοποθετούνται δίπλα-δίπλα */
-  justify-content:center;
-  gap: 10px; /* Κενό ανάμεσα στα κουμπιά */
-  width: 100%; /* Τα κουμπιά να ευθυγραμμίζονται με το input */
-  max-width: 400px;
-}
-
-.searchbox-button {
-  background-color: #93b795;
+.searchbox-submit-button {
+  background-color: #93B795;
   color: white;
   border: none;
   padding: 10px 20px;
   font-size: 14px;
   font-weight: bold;
+  border-radius: 30px;
   cursor: pointer;
-  border-radius: 35px;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.searchbox-button:hover {
+.searchbox-submit-button:hover {
   background-color: #769f7d;
+  transform: scale(1.05);
+}
+
+/* Στυλ για Filter και Sort κουμπιά */
+.filter-sort-container {
+  display: flex;
+  gap: 20px; /* Μεγαλύτερη απόσταση μεταξύ των κουμπιών */
+  justify-content: center; /* Τα κεντράρει */
+}
+
+.filter-button,
+.sort-button {
+  background-color: #93B795;
+  color: white;
+  border: none;
+  padding: 12px 30px; /* Μεγαλύτερο padding για μεγαλύτερα κουμπιά */
+  font-size: 16px; /* Μεγαλύτερη γραμματοσειρά */
+  font-weight: bold;
+  border-radius: 40px; /* Πιο στρογγυλεμένα */
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  min-width: 160px; /* Ελάχιστο πλάτος για ομοιομορφία */
+  text-align: center;
+}
+
+.filter-button:hover,
+.sort-button:hover {
+  background-color: #769f7d;
+  transform: scale(1.1); /* Ελαφρώς μεγαλύτερο scale στο hover */
 }
 
 /* Popular Categories Container */
@@ -540,7 +572,7 @@ category-image:hover {
 }
 
 .modal-content {
-  background: white;
+  background:  #FFCFCF;
   padding: 20px;
   border-radius: 10px;
   width: 400px;
@@ -568,20 +600,24 @@ category-image:hover {
   display: flex; /* Τα div τοποθετούνται δίπλα-δίπλα */
   gap: 20px; /* Απόσταση ανάμεσα στα div */
   margin-top: 30px; /* Απόσταση από τις δημοφιλείς κατηγορίες */
-
+  height: 600px; /* Αν δεν υπάρχει, πρόσθεσέ το */
+  min-height: 500px;
 }
 
 .left-content {
   flex: 1; /* Παίρνει το 50% του χώρου */
   max-width: 50%; /* Περιορίζει το μέγιστο πλάτος */
-  overflow-y: auto; /* Κάνει scroll αν η λίστα είναι μεγάλη */
+  overflow-y: scroll; /* Κάνει scroll αν η λίστα είναι μεγάλη */
   padding-right: 20px; 
+  height: 100%; /* Εξασφαλίζει ότι πιάνει το μέγιστο ύψος του γονέα */
 
 }
 
 .right-content {
   flex: 1;
-  max-width: 50%; 
+  max-width: 50%;
+  height: 100%; /* Εξασφαλίζει ότι πιάνει το μέγιστο ύψος του γονέα */
+
 
 }
 
@@ -591,23 +627,22 @@ category-image:hover {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  max-height: 600px;
-  overflow-y: auto;
-  padding: 10px;
-  border: 2px solid #93b795;
-  border-radius: 10px;
-  background-color: #fff;
+  margin: 20px;
 }
 
 .business-card {
   display: flex;
-  gap: 20px;
-  padding: 20px;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
   border: 1px solid #ddd;
   border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   background-color: #fafafa;
-  align-items: center;
+}
+
+.business-card:hover {
+  background-color: #f9f9f9;
 }
 
 .business-image {
@@ -615,148 +650,204 @@ category-image:hover {
   height: 120px;
   border-radius: 10px;
   object-fit: cover;
-  background-color: #f0f0f0;
 }
 
 .business-content {
   flex: 1;
 }
 
-.business-header {
-  display: flex;
-  justify-content: space-between; /* Δεξιά τα κουμπιά */
-  align-items: center;
-  margin-bottom: 10px;
+.business-content h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
 }
 
-.business-header h2 {
-  font-size: 20px;
-  margin: 0;
+.business-content p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #555;
 }
 
 .button-container {
   display: flex;
-  gap: 0px; /* Απόσταση ανάμεσα στην καρδιά και το αστέρι */
+  gap: 10px;
 }
-
-.heart-button,
-.star-button {
-  cursor: pointer;
-  background: none;
-  border: none;
-}
-
-.heart-button svg,
-.star-button svg {
-  width: 24px;
-  height: 24px;
-  fill: #555; /* Αρχικό χρώμα */
-}
-
-.heart-button:hover svg {
-  fill: #e74c3c; /* Κόκκινο για την καρδιά */
-}
-
-.star-button:hover svg {
-  fill: #f1c40f; /* Χρυσό για το αστέρι */
-}
-
 
 /*---------------------------------------------------------*/
-/* Navigation Buttons -- SlideShow */
 
-.navButton {
-  transform: translateY(-50%);
-  width: 70px;
-  height: 70px;
-  background-color: #93B795;
-  color: #fff;
-  border: none;
-  border-radius: 5%;
+/*DETAILS*/
+.content-container {
+  display: flex; /* Flexbox layout */
+  gap: 20px; /* Απόσταση ανάμεσα στα containers */
+  margin-top: 20px; /* Κενό πάνω από τα containers */
+  height: 600px; /* Σταθερό ύψος για να είναι ίσα */
+}
+
+.left-content,
+.right-content {
+  flex: 1; /* Ίδια αναλογία μεγέθους */
+  height: 100%; /* Πλήρες ύψος του γονέα */
+  border: 2px solid #93b795; /* Πράσινο περίγραμμα */
+  border-radius: 10px; /* Στρογγυλεμένες γωνίες */
+  overflow: hidden; /* Απόκρυψη περιεχομένου που βγαίνει έξω */
+  background-color: #fff; /* Λευκό background */
+}
+
+.left-content {
+  padding: 0px; /* Εσωτερικό κενό */
+  border: 4px solid #93b795;
+}
+.businesses-container {
   display: flex;
-  font-size: 30px;
+  flex-direction: column; /* Τα στοιχεία σε κάθετη διάταξη */
+  gap: 20px; /* Απόσταση ανάμεσα στις κάρτες */
+  
+  
+}
+
+.right-content {
+  display: flex; /* Διατηρεί ευθυγραμμισμένο το περιεχόμενο */
+  justify-content: center; /* Κέντρο στο χάρτη */
+  align-items: center;
+  background-color: #f9f9f9; /* Ελαφρύ γκρι για διαφοροποίηση */
+}
+
+
+.business-card {
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #fafafa;
   cursor: pointer;
-  z-index: 10;
-  transition: transform 0.2s ease;
-  margin: 50px;
-  justify-content: space-around;
-  align-items: center;
 }
 
-.navButton:hover {
-transform: translateY(-50%) scale(1.1); 
+.business-card:hover {
+  background-color: #f4f4f4;
 }
 
-.left {
-left: 20px; 
-}
-
-.right {
-right: 20px; 
-}
-
-
-/*SLIDESWHOW*/
-.slideshowContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center; 
-  width: 100%;
-  height: 360px;
-  margin: 20px auto;
-  position: relative;
-  overflow: hidden;
-}
-
-
-
-.card {
-  display: flex;
-  align-items: center;
-  gap: 20px; 
-  background: #fff;
-  max-width: 50%;
+.business-image {
+  width: 80px;
+  height: 80px;
   border-radius: 10px;
-  overflow: hidden;
-  border: 2px solid #93b795;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease; 
-}
-
-.card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
-}
-
-.card img {
-  width: 300px;
-  height: 300px;
   object-fit: cover;
-  border-radius: 10px;
 }
 
-.card h2 {
-  font-size: 1.5rem;
+.business-content h2 {
+  font-size: 16px;
   margin: 0;
 }
 
-.card p {
-  font-size: 1rem;
+.business-content p {
+  font-size: 14px;
   color: #555;
-  margin: 5px 0;
+  margin: 2px 0;
 }
-
-.text_content {
-  padding: 15px;
-  flex: 1;
-  font-family: 'Quicksand', sans-serif;
-}
-
-.img {
-  border-radius: 15px;
-  width: 100%;
-  height: 100%;
+.business-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 10px;
   object-fit: cover;
+  background-color: #f0f0f0;
 }
 
-/*-------------------------------------------------*/
+/*--------------------------------------------------*/
+/*Nav bar*/
+/* HEADER */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 250px; /* Προσαρμόζεται στο ύψος του logo */
+  padding: 8px 40px;
+  margin: 0; /* Αφαιρούμε το περιθώριο */
+}
+
+.navbar-logo {
+  flex: 1; /* Χώρος για το logo */
+  display: flex;
+  align-items: center;
+}
+
+.navbar-logo img {
+  height: 250px;
+  width: auto; /* Διατηρεί τις αναλογίες */
+  border-radius: 50%; /* Στρογγυλό */
+  transition: transform 0.3s ease;
+}
+
+.navbar-logo img:hover {
+  transform: scale(1.1); /* Ελαφριά μεγέθυνση στο hover */
+}
+
+.navbar-links {
+  flex: 2; /* Περισσότερος χώρος για τα links */
+  display: flex;
+  justify-content: flex-end; /* Τα links πάνε προς τα δεξιά */
+  gap: 20px; /* Απόσταση ανάμεσα στα links */
+  list-style: none;
+  margin-right: 10px; /* Απόσταση από τη δεξιά άκρη */
+  
+}
+
+.navbar-links li {
+  font-size: 18px;
+  font-weight: bold;
+  
+}
+
+.navbar-links a {
+  text-decoration: none;
+  color: white;
+  background-color: #93B795; /* Πράσινο κουμπί */
+  padding: 10px 20px;
+  border-radius: 30px; /* Στρογγυλεμένες γωνίες */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Προσθήκη εφέ */
+  min-width: 120px; /* Σταθερό πλάτος */
+  text-align: center;
+  
+
+}
+
+.navbar-links a:hover {
+  background-color: #769f7d; /* Πιο σκούρο πράσινο στο hover */
+  transform: scale(1.05); /* Ελαφριά μεγέθυνση */
+}
+
+.navbar-signin {
+  display: flex;
+  align-items: center;
+}
+
+/* Responsive Σχεδίαση */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    height: auto; /* Προσαρμόζεται το ύψος */
+    padding: 16px 20px;
+  }
+
+  .navbar-logo {
+    justify-content: center; /* Κεντράρει το logo */
+  }
+
+  .navbar-links {
+    justify-content: center; /* Κεντράρει τα links */
+    margin-right: 0;
+    gap: 10px; /* Μικρότερο κενό */
+    flex-wrap: wrap; /* Επιτρέπει την αναδίπλωση */
+  }
+
+  .navbar-links a {
+    min-width: 100px; /* Μικρότερο πλάτος */
+    padding: 8px 16px; /* Μικρότερο padding */
+  }
+
+  .navbar-logo img {
+    height: 150px; /* Μικρότερο ύψος για κινητά */
+  }
+}
