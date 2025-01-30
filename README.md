@@ -37,15 +37,15 @@ To run the project locally:
 
 1. Clone the repository:
 
-   git clone https://github.com/Evangelia93/Project-Estia.git
+ - git clone https://github.com/Evangelia93/Project-Estia.git
 
 2.	Install the necessary dependencies:
 
-    npm install
+ - npm install
 
 3.	Start the local development server:
 
-    npm run dev
+ - npm run dev
 
 4.	Open your browser and visit http://localhost:5179 to view the app.
 
@@ -79,8 +79,8 @@ When a feature is complete, code is merged into the develop branch. The develop 
 
 | Name | GitHub Profile | Contributions |
 |--------|---------|-------------|
-| Evangelia Tosiou | evangelia93 | Frontend Development, Features Implementation |
-| Manisa | Manisha Glaentzerm | Frontend Development, UI/UX Improvements |
+| Evangelia Tosiou | [evangelia93](https://github.com/Evangelia93) | Frontend Development, Features Implementation |
+| Manisha | [Manisha Glaentzerm](https://github.com/glaentzerm) | Frontend Development, UI/UX Improvements |
 
 ---
 
