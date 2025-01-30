@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
-import styles from '../Map/Map.module.css';
+import styles from './Map.module.css';
 
 const defaultLocation = [50.8503, 4.3517]
 // eslint-disable-next-line react/prop-types
