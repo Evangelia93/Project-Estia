@@ -1,0 +1,43 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Quicksand', serif;
+    line-height: 1.6;
+    background-color: #FFFDEC;
+    color: #333;
+    margin-left: 100px;
+
+}
+ .top-root {
+    width: 100%;
+    align-items: center; 
+    min-height: 100vh;
+  }
+  
+  .container {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1rem;
+  }
+  
+  @media (min-width: 640px) {
+    .container {
+      max-width: 640px;
+    }
+  }
+  @media (min-width: 768px) {
+    .container {
+      max-width: 768px;
+    }
+  }
+  @media (min-width: 1024px) {
+    .container {
+      max-width: 1024px;
+    }
+  }
+  
