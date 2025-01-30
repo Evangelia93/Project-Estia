@@ -37,15 +37,15 @@ To run the project locally:
 
 1. Clone the repository:
 
-- **git clone https://github.com/Evangelia93/Project-Estia.git
+- git clone https://github.com/Evangelia93/Project-Estia.git
 
 2.	Install the necessary dependencies:
 
-- ***npm install
+- npm install
 
 3.	Start the local development server:
 
-- **npm run dev
+- npm run dev
 
 4.	Open your browser and visit http://localhost:5179 to view the app.
 
