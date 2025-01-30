@@ -80,7 +80,7 @@ When a feature is complete, code is merged into the develop branch. The develop 
 | Name | GitHub Profile | Contributions |
 |--------|---------|-------------|
 | Evangelia Tosiou | [evangelia93](https://github.com/Evangelia93) | Frontend Development, Features Implementation |
-| Manisa | [Manisha Glaentzerm](https://github.com/glaentzerm) | Frontend Development, UI/UX Improvements |
+| Manisha | [Manisha Glaentzerm](https://github.com/glaentzerm) | Frontend Development, UI/UX Improvements |
 
 ---
 
