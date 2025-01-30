@@ -1,18 +1,4 @@
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Quicksand', serif;
-    line-height: 1.6;
-    background-color: #FFFDEC;
-    color: #333;
-    margin-left: 100px;
-
-}
  .top-root {
     width: 100%;
     align-items: center; 
@@ -35,9 +21,9 @@ body {
       max-width: 768px;
     }
   }
-  @media (min-width: 1024px) {
+  @media (min-width: 1280px) {
     .container {
-      max-width: 1024px;
+      max-width: 1280px;
     }
   }
   

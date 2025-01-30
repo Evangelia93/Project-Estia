@@ -9,13 +9,13 @@ import { useBusinessAddresses } from './hooks/useBusinessAddresses';
 import { useBusinessData } from './hooks/useBusinessData';
 import PopularCategories from './components/PopularCategories';
 import ListContainer from './pages/ListContainer';
+import "./styles/global.css"
 
 function Layout() {
   return (
     <div className="top-root">
       <div className="container">
         <NavBar />
-     
       </div>
       <div className="container">
         <Outlet />
