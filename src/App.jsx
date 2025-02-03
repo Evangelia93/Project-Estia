@@ -1,8 +1,8 @@
 import { useMemo } from 'react';
-import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
 import Home from './pages/Home';
-import About from "./pages/About"
-import Forum from "./components/Forum"
+import About from "./pages/About";
+import Forum from "./components/Forum";
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import { useBusinessAddresses } from './hooks/useBusinessAddresses';
@@ -10,6 +10,7 @@ import { useBusinessData } from './hooks/useBusinessData';
 import PopularCategories from './components/PopularCategories';
 import ListContainer from './pages/ListContainer';
 import "./styles/global.css"
+import AuthForm from './components/SignIn.module.css'
 
 function Layout() {
   return (
@@ -24,7 +25,6 @@ function Layout() {
     </div>
   );
 }
-
 
 function App() {
   const { businessAddreses, isLoading: isBusinessAddressLoading, hasError: hasBusinessAdrressError } = useBusinessAddresses();
@@ -46,11 +46,11 @@ function App() {
   }).filter((item) => item !== null), [businessAddreses, businessData]);
 
   if (isBusinessAddressLoading || isBusinessLoading) {
-    return <p>Loading...</p>
+    return <p>Loading...</p>;
   }
 
   if (hasBusinessAdrressError || hasBusinessError) {
-    return <p>Something went wrong. please try again</p>
+    return <p>Something went wrong. please try again</p>;
   }
 
   return (
@@ -60,8 +60,9 @@ function App() {
           <Route index element={<Home businessData={combinedData} />} />
           <Route path="about" element={<About />} />
           <Route path="forum" element={<Forum combinedData={combinedData} />} />
-          <Route path="popularcategories" element={<PopularCategories combinedData={combinedData}/>} />
-          <Route path="listcontainer" element={<ListContainer combinedData={combinedData} />} />        
+          <Route path="popularcategories" element={<PopularCategories combinedData={combinedData} />} />
+          <Route path="listcontainer" element={<ListContainer combinedData={combinedData} />} />
+          <Route path="signin" element={<AuthForm />} /> {/* Updated to use AuthForm */}
         </Route>
       </Routes>
     </BrowserRouter>

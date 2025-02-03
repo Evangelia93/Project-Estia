@@ -19,7 +19,7 @@ function Forum() {
     };
 
     setMessages([...messages, newMessageObj]);
-    setNewMessage(""); // Clear the form
+    setNewMessage(""); 
   };
 
   const handleDelete = (id) => {
