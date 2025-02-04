@@ -1,3 +1,5 @@
+
+
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
 
 * {
@@ -18,7 +20,7 @@
 /*SORT BY*/
 
   /* Button styling */
-  .sort-by-button {
+  /* .sort-by-button {
     padding: 0;
     ;
     color: white;
@@ -28,7 +30,7 @@
     border-radius: 5px;
     cursor: pointer;
     transition: all 0.3s ease;
-  }
+  } */
 
   /* Popup content styling */
 
@@ -314,7 +316,7 @@
 
 /* SearchBox Styles */
 
-.searchbox-wrapper {
+/* .searchbox-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -358,7 +360,7 @@
 .searchbox-submit-button:hover {
   background-color: #769f7d;
   transform: scale(1.05);
-}
+} */
 
 /*Filters*/
 .filter-sort-container {
@@ -745,7 +747,7 @@ category-image:hover {
 /*--------------------------------------------------*/
 /*Nav bar*/
 /* HEADER */
-.navbar {
+/* .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -837,7 +839,7 @@ category-image:hover {
 
   .navbar-logo img {
     height: 150px; 
-}}
+}} */
 .reviews-container {
   margin-top: 15px;
   max-height: 200px;

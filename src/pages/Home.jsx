@@ -26,7 +26,7 @@ function Home({ businessData }) {
   return (
     <div>
       <SearchBox onClick={toggleFilterModal} />
-      <PopularCategories />
+      {/* <PopularCategories /> */}
       {businessData && businessData.length > 0 ? (
         <Details combinedData={businessData} />
       ) : (

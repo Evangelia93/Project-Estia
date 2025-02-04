@@ -1,0 +1,28 @@
+@use 'variables' as *;
+@use 'reset' as *;
+@use 'mixins' as *;
+
+// HEADER 
+
+header {
+    @include flex-row-center(space-between);
+    padding: $auto-padding-5;
+    .logo img {
+        width: 100px;
+    }
+}
+
+.navbar {
+    @include flex-row-center;
+    gap: 20px;
+
+    li {
+        text-decoration: none;
+        color: white;
+        font-weight: 500;
+        font-size: 1em;
+    }
+}
+
+// FOOTER
+

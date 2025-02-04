@@ -1,0 +1,51 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
+.button {
+  text-decoration: none;
+  color: #fefefe;
+  font-weight: 500;
+  font-size: 1em;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background: #93B795;
+}
+
+.searchbox-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  gap: 10px;
+  background: #FFFDEC;
+}
+.searchbox-wrapper .searchbox-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 20px;
+  padding-right: 5px;
+  gap: 10px;
+  background: white;
+  border-radius: 50px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+.searchbox-wrapper input {
+  width: 40vw;
+  border: none;
+  transition: width 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.searchbox-wrapper input:focus {
+  width: 50vw;
+  outline: none;
+}
+.searchbox-wrapper button {
+  text-decoration: none;
+  color: #fefefe;
+  font-weight: 500;
+  font-size: 1em;
+  width: 40px;
+  padding: 10px;
+  border-radius: 50px;
+  background: #93B795;
+}/*# sourceMappingURL=components.css.map */

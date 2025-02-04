@@ -1,0 +1,16 @@
+@use 'variables' as *;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: $font-quicksand;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    transition: none;
+}

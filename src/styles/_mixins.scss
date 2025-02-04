@@ -1,0 +1,45 @@
+@use 'variables' as *;
+
+
+// FLEXBOX MIXINS
+
+@mixin flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+@mixin flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+@mixin flex-row-center ($justify-content: center) {
+    display: flex;
+    justify-content: $justify-content;
+    align-items: center;
+}
+
+@mixin flex-column-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+// FONTS
+
+@mixin font-properties ($font-size: 1em, $font-weight: 400, $line-height: 1.5) {
+    font-size: $font-size;
+    font-weight: $font-weight;
+    line-height: $line-height;
+}
+
+//LINKS 
+
+@mixin link-properties {
+    text-decoration: none;
+    color: $text-color;
+    font-weight: 500;
+    font-size: 1em;
+}
+

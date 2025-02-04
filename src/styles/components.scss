@@ -1,0 +1,47 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.button {
+    @include link-properties;
+    padding: 10px 20px;
+    border-radius: $border-radius-05;
+    background: $secondary-color;
+}
+
+.searchbox-wrapper {
+    @include flex-row-center;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    gap: 10px;
+    background: $background-color;
+
+    .searchbox-container {
+        @include flex-row-center;
+        padding-left: 20px;
+        padding-right: 5px;
+        gap: 10px;
+        background: white;
+        border-radius: $border-radius-50;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+
+    }
+    input {
+        width: 40vw;
+        border: none;
+        transition: width $transition;
+
+        &:focus {
+            width: 50vw;
+            outline: none;
+        }
+    }
+    button {
+        @include link-properties;
+        width: 40px;
+        padding: 10px;
+        border-radius: $border-radius-50;
+        background: $secondary-color;
+
+    }
+}

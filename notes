@@ -1,0 +1,7 @@
+HOOKS 
+
+- can be use merged in one file
+
+COMPONENTS AND UTILS
+
+- create two folders: components(card, forum, ... ) and utils (filter, sort, ... )
