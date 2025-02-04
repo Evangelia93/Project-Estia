@@ -17,12 +17,14 @@ function Map({ combinedData, selectedLocation, setCurrentIndex }) {
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
       }).addTo(map);
     }
-
+    
 
     // Προσθήκη markers στον χάρτη
     // eslint-disable-next-line react/prop-types
     combinedData.forEach((item, index) => {
-      const {
+      if (!item) return;
+
+      let {
         latitude,
         longitude,
         name,
@@ -30,6 +32,9 @@ function Map({ combinedData, selectedLocation, setCurrentIndex }) {
         road_name,
         city,
       } = item;
+
+      latitude = latitude ?? 50.8503; // Brussels latitude
+      longitude = longitude ?? 0.3517; // Brussels longitude
 
       if (latitude && longitude) {
         const popupContent = `
