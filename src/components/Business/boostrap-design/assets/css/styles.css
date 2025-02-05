@@ -1,0 +1,134 @@
+.form-container {
+  padding: 20px;
+  border-radius: 8px;
+  /*box-shadow: 0 2px 4px rgba(0,0,0, 0.1);*/
+  /*max-width: 80vw;*/
+  /*maring: 200px auto;*/
+  margin: 200px auto;
+  gap: 1rem;
+  width: 500px;
+}
+
+.form-control {
+  border-top: none;
+  border-right: none;
+  margin-bottom: 10px;
+  border-radius: 0px 0px 0px 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.custom-file-upload {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  border: 1px solid #ced4da;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-radius: 0px 0px 0px 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.custom-file-upload label.btn {
+  margin: 0;
+}
+
+.btn-secondary {
+  background-color: #93B795;
+  color: #fefefe;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 1em;
+  font-weight: 500;
+}
+
+#fileName {
+  margin-left: 10px;
+  color: #6c757d;
+  /*font-family: var(--bs-body-font-family);*/
+  /*font-weight: 400;*/
+  /*line-height: #212529;*/
+  /*opacity: 0.65;*/
+}
+
+#addBusiness {
+  justify-content: center;
+}
+
+.form-control:focus {
+  box-shadow: none;
+  border-color: #93B795;
+}
+
+.form-control:disabled {
+    background-color: #e9ecef;
+    cursor: not-allowed;
+}
+
+.text-danger {
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+.address-search-container {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.suggestions-container {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #ced4da;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.suggestion-item {
+    padding: 8px 12px;
+    cursor: pointer;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.suggestion-item:hover {
+    background-color: #f8f9fa;
+}
+
+.searching {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6c757d;
+    font-size: 0.875rem;
+}
+
+.Toastify__toast {
+    border-radius: 8px;
+    font-family: inherit;
+}
+
+.Toastify__toast--error {
+    background: #fff;
+    color: #dc3545;
+    border: 1px solid #dc3545;
+}
+
+.Toastify__toast--success {
+    background: #fff;
+    color: #93B795;
+    border: 1px solid #93B795;
+}
+
+.Toastify__toast-container--bottom-right {
+    bottom: 3em !important;  
+    right: 2em !important;   
+}
+
