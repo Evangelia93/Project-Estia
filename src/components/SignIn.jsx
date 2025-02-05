@@ -86,7 +86,7 @@ export default function SignIn() {
   return (
 
     <Popup
-      trigger={<button className="navButton">Login / Sign Up</button>}
+      trigger={<button className="button">Login / Sign Up</button>}
       modal
       nested
     >
@@ -95,8 +95,8 @@ export default function SignIn() {
           <span className="close" onClick={close}>&times;</span>
           <div className="form-container">
             <div className="form-toggle">
-              <button className={isLogin ? 'active' : ""} onClick={() => setIsLogin(true)}>Login</button>
-              <button className={!isLogin ? 'active' : ""} onClick={() => setIsLogin(false)}>Sign Up</button>
+              <button className={`button ${isLogin} ? 'active' : ""`} onClick={() => setIsLogin(true)}>Login</button>
+              <button className={`button ${!isLogin} ? 'active' : ""`} onClick={() => setIsLogin(false)}>Sign Up</button>
             </div>
 
             {isLogin ? (

@@ -7,6 +7,33 @@
   padding: 10px 20px;
   border-radius: 5px;
   background: #93B795;
+  border: none;
+  cursor: pointer;
+}
+
+.button-modal {
+  text-decoration: none;
+  color: #fefefe;
+  font-weight: 500;
+  font-size: 1em;
+  padding: 5px 15px;
+  border-radius: 50px;
+  background: #fefefe;
+  border: none;
+  cursor: pointer;
+  color: #93B795;
+  font-size: 0.9em;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.button-modal:hover {
+  border-color: #93B795;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #93B795;
+  width: 100%;
 }
 
 .searchbox-wrapper {
@@ -23,6 +50,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 5px 0;
   padding-left: 20px;
   padding-right: 5px;
   gap: 10px;
@@ -48,4 +76,67 @@
   padding: 10px;
   border-radius: 50px;
   background: #93B795;
+}
+
+.searchbox-separator {
+  margin: 0 auto;
+  width: 100%;
+  margin: 20px 0;
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: fixed;
+  z-index: 1001;
+}
+
+.modal-wrapper {
+  padding: 20px 0;
+  width: 500px;
+  border-radius: 10px;
+  background: #fefefe;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+}
+.modal-wrapper h3,
+.modal-wrapper .reset-apply-button-container {
+  padding: 0 20px;
+}
+.modal-wrapper .reset-apply-button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-container {
+  padding: 20px;
+}
+.modal-container label {
+  color: #4a4a4a;
+  font-size: 1.1em;
+  font-weight: 600;
+}
+.modal-container .buttons-container {
+  display: flex;
+  flex-direction: row;
+  margin: 20px 0;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.modal-container button.selected {
+  background: #93B795;
+  color: #fefefe;
+}
+.modal-container select {
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: #fefefe;
+  color: #4a4a4a;
+  font-weight: 500;
+}
+.modal-container select:focus {
+  outline: none;
 }/*# sourceMappingURL=components.css.map */

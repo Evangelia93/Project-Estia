@@ -43,3 +43,27 @@
     font-size: 1em;
 }
 
+// BUTTONS 
+@mixin button-properties ($padding: 10px 20px, $border-radius: $border-radius-05, $background: $secondary-color) {
+    @include link-properties;
+
+    padding: $padding;
+    border-radius: $border-radius;
+    background: $background;
+    border: none;
+    cursor: pointer;
+}
+
+// POSITIONS
+
+@mixin center-margin ($width: 50%) {
+    margin: 0 auto;
+    width: $width;
+}
+
+@mixin center-position {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);  
+}

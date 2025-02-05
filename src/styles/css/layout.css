@@ -31,8 +31,18 @@ header .logo img {
   gap: 20px;
 }
 .navbar li {
+  list-style: none;
+  border-color: transparent;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.navbar li a {
   text-decoration: none;
-  color: white;
+  color: #fefefe;
   font-weight: 500;
   font-size: 1em;
+  color: #93B795;
+}
+.navbar li:hover {
+  border-color: #93B795;
 }/*# sourceMappingURL=layout.css.map */

@@ -17,10 +17,20 @@ header {
     gap: 20px;
 
     li {
-        text-decoration: none;
-        color: white;
-        font-weight: 500;
-        font-size: 1em;
+        list-style: none;
+        border-color: transparent;
+        border-bottom: 2px solid transparent;
+        transition: border-color $transition;
+        
+        a {
+            @include link-properties;
+            color: $secondary-color;
+        }
+
+        &:hover {
+            border-color: $secondary-color;
+            
+        }
     }
 }
 

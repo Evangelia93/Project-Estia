@@ -4,6 +4,7 @@ import SearchBox from "../components/SearchBox.jsx";
 import PopularCategories from "../components/PopularCategories.jsx";
 import Details from "../components/Details.jsx";
 import "../styles/styles.css";
+import Modal from "../components/Modal.jsx";
 
 
 function Home({ businessData }) {
@@ -26,19 +27,20 @@ function Home({ businessData }) {
   return (
     <div>
       <SearchBox onClick={toggleFilterModal} />
+      <Modal />
       {/* <PopularCategories /> */}
       {businessData && businessData.length > 0 ? (
         <Details combinedData={businessData} />
       ) : (
         <p>No businesses found</p>
       )}
-
+{/* 
       {isFilterModalOpen && (
         <FilterModal
           onClose={toggleFilterModal}
           onApply={handleApplyFilters}
         />
-      )}
+      )} */}
 
       {feedbackMessage && (
         <div className="feedback-message">{feedbackMessage}</div>

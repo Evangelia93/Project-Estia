@@ -72,7 +72,7 @@
   }
   
   /* Close button styling */
-  .popup-content .close-button {
+  /* .popup-content .close-button {
     margin-top: 15px;
     padding: 10px 20px;
     background-color: #93B795;
@@ -82,7 +82,7 @@
     cursor: pointer;
     
   }
-  
+   */
   .popup-content .close-button:hover {
     background-color: #769f7d;
   }
@@ -128,7 +128,7 @@
     cursor: pointer;
   }
   
-  button {
+  /* button {
     background-color: #93B795;
     border: none;
     color: white;
@@ -140,11 +140,11 @@
     margin: 10px 2px;
     cursor: pointer;
     border-radius: 5px;
-  }
+  } */
   
-  button:hover {
+  /* button:hover {
     background-color:  #769f7d;
-  }
+  } */
   
   hr {
     margin: 20px 0;
@@ -369,7 +369,7 @@
   justify-content: center; 
 }
 
-.filter-button,
+/* .filter-button,
 .sort-button {
   background-color: #93B795;
   color: white;
@@ -382,13 +382,13 @@
   transition: background-color 0.3s ease, transform 0.2s ease;
   min-width: 160px; 
   text-align: center;
-}
+} */
 
-.filter-button:hover,
+/* .filter-button:hover,
 .sort-button:hover {
   background-color: #769f7d;
   transform: scale(1.1); 
-}
+} */
 
 /* Popular Categories Container */
 .popular-categories-container {

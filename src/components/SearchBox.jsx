@@ -47,17 +47,19 @@ function SearchBox() {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSearch()} />
-          <button className="searchbox-submit-button" onClick={handleSearch}>
+          <button className="searchbox-submit button" onClick={handleSearch}>
             <i className="fa-solid fa-magnifying-glass"></i>
           </button>
         </div>
       </div>
+      
+      <hr className="searchbox-separator"/>
 
       <div className="filter-sort-container">
-        <button className="filter-button" onClick={toggleFilterModal}>
+        <button className="filter-button button" onClick={toggleFilterModal}>
           Filters
         </button>
-        <button className="sort-button" onClick={toggleSortByModal}>
+        <button className="sort-button button" onClick={toggleSortByModal}>
           Sort By
         </button>
       </div>

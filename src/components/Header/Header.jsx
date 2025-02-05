@@ -11,13 +11,13 @@ export default function Header() {
                 <img src="./src/assets/estia.png" alt="Logo" />
             </Link>
             <ul className="navbar">
-                <li><Link to='/'><button  className="button">Home</button></Link></li>
-                <li><Link to='/about'><button className="button">About</button></Link></li>
-                <li><Link to='/forum'><button className="button">Forum</button></Link></li>
-                <li><Link to='/business'><button className="button">Business</button></Link></li>
-                <li><Popup ><button className="button">Forum</button></Popup></li>
-                <div className="navbar-signin">
-                    <SignIn />
+                <li><Link to='/'>Home</Link></li>
+                <li><Link to='/about'>About</Link></li>
+                <li><Link to='/forum'>Forum</Link></li>
+                <li><Link to='/business'>Business</Link></li>
+                <li><Popup >Forum </Popup></li>
+                <div >
+                    <SignIn className="button"/>
                 </div>
             </ul>
         </header>

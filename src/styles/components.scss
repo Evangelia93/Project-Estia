@@ -1,12 +1,30 @@
 @use 'variables' as *;
 @use 'mixins' as *;
 
+// GENERAL ======================================================================
+
 .button {
-    @include link-properties;
-    padding: 10px 20px;
-    border-radius: $border-radius-05;
-    background: $secondary-color;
+    @include button-properties;
 }
+
+.button-modal {
+    @include button-properties(5px 15px, $border-radius-50, $background-white-color);
+    color: $secondary-color;;
+    font-size: .9em;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    transition: border-color $transition;
+    &:hover {
+        border-color: $secondary-color;
+    }
+}
+
+hr {
+    border: none;
+    border-top: 1px solid $secondary-color;
+    width: 100%;
+}
+
+// SEARCHBOX ======================================================================
 
 .searchbox-wrapper {
     @include flex-row-center;
@@ -18,6 +36,7 @@
 
     .searchbox-container {
         @include flex-row-center;
+        padding: 5px 0;
         padding-left: 20px;
         padding-right: 5px;
         gap: 10px;
@@ -43,5 +62,73 @@
         border-radius: $border-radius-50;
         background: $secondary-color;
 
+    }
+}
+
+.searchbox-separator {
+    @include center-margin (100%);
+    margin: 20px 0;
+}
+
+// MODAL ======================================================================
+
+.modal {
+    @include center-position;
+    position: fixed;
+    z-index: 1001;
+}
+
+.modal-wrapper {
+    padding: 20px 0;
+    width: 500px;
+    border-radius: $border-radius-10;
+    background: $background-white-color;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+
+    h3,
+    .reset-apply-button-container {
+        padding: 0 20px;
+    } 
+
+    .reset-apply-button-container {
+        @include flex-row-center(space-between);
+    }
+}
+
+.modal-container {
+    padding: 20px;
+
+    label {
+        color: $text-color-dark;
+        font-size: 1.1em;
+        font-weight: 600;
+    }
+
+    .buttons-container {
+        @include flex-row;
+        margin: 20px 0;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    button {
+        &.selected {
+            background: $secondary-color;
+            color: $background-white-color;
+        }
+    }
+
+    select {
+
+        padding: 5px 10px;
+        border-radius: $border-radius-05;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        background: $background-white-color;
+        color: $text-color-dark;
+        font-weight: 500;
+
+        &:focus {
+            outline: none;
+        }
     }
 }
