@@ -29,8 +29,22 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.custom-file-upload label.btn {
+
+.custom-file-upload .btn-secondary {
   margin: 0;
+  padding: 5px 10px;
+  height: fit-content;
+}
+
+
+.custom-file-upload #fileName {
+  margin-left: 10px;
+  margin-bottom: 0;
+  padding: 0;
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .btn-secondary {
@@ -43,15 +57,6 @@
   font-weight: 500;
 }
 
-#fileName {
-  margin-left: 10px;
-  color: #6c757d;
-  /*font-family: var(--bs-body-font-family);*/
-  /*font-weight: 400;*/
-  /*line-height: #212529;*/
-  /*opacity: 0.65;*/
-}
-
 #addBusiness {
   justify-content: center;
 }
@@ -61,74 +66,32 @@
   border-color: #93B795;
 }
 
-.form-control:disabled {
-    background-color: #e9ecef;
-    cursor: not-allowed;
+.custom-file-upload label.tb {
+  margin: 0;
 }
 
-.text-danger {
-    color: #dc3545;
-    font-size: 0.875rem;
-    margin-top: 0.25rem;
-}
-
-.address-search-container {
-    position: relative;
-    margin-bottom: 1rem;
-}
-
-.suggestions-container {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: white;
-    border: 1px solid #ced4da;
-    border-radius: 0 0 8px 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-    max-height: 200px;
-    overflow-y: auto;
-}
-
-.suggestion-item {
-    padding: 8px 12px;
-    cursor: pointer;
-    border-bottom: 1px solid #f0f0f0;
-}
-
-.suggestion-item:hover {
-    background-color: #f8f9fa;
-}
-
-.searching {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #6c757d;
-    font-size: 0.875rem;
-}
-
+/* Stilizare pentru Toastify */
 .Toastify__toast {
-    border-radius: 8px;
-    font-family: inherit;
+    font-family: 'Roboto', sans-serif;  /* sau alt font dorit */
+    font-size: 14px;
+    font-weight: 500;
 }
 
 .Toastify__toast--error {
     background: #fff;
     color: #dc3545;
     border: 1px solid #dc3545;
+    font-family: inherit;
 }
 
 .Toastify__toast--success {
     background: #fff;
     color: #93B795;
     border: 1px solid #93B795;
+    font-family: inherit;
 }
 
 .Toastify__toast-container--bottom-right {
-    bottom: 3em !important;  
-    right: 2em !important;   
+    bottom: 3em !important;
+    right: 2em !important;
 }
-
