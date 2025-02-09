@@ -29,20 +29,25 @@ function App() {
   const { businessAddreses, isLoading: isBusinessAddressLoading, hasError: hasBusinessAdrressError } = useBusinessAddresses();
   const { businessData, isLoading: isBusinessLoading, hasError: hasBusinessError } = useBusinessData();
 
-  const combinedData = useMemo(() => businessData && businessData.map((business) => {
-    const address = businessAddreses && businessAddreses.find(
-      (addr) => addr.id === business.id_address
-    );
+  const combinedData = useMemo(() => {
+    if (!businessData || !businessAddreses) return [];
+    
+    return businessData.map((business) => {
+      const address = businessAddreses.find(
+        (addr) => addr.id === business.id_address
+      );
 
-    if (address && address.latitude && address.longitude) {
+      // Combinăm datele business-ului cu adresa
       return {
         ...business,
         ...address,
       };
-    } else {
-      return;
-    }
-  }).filter((item) => item !== null), [businessAddreses, businessData]);
+    }).filter(item => 
+      item && 
+      typeof item.latitude === 'number' && 
+      typeof item.longitude === 'number'
+    );
+  }, [businessAddreses, businessData]);
 
   if (isBusinessAddressLoading || isBusinessLoading) {
     return <p>Loading...</p>;

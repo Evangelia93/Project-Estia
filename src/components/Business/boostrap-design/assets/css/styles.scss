@@ -1,7 +1,239 @@
-@import '../../../../styles/_variables.scss';
+@import '../../../../../styles/_variables.scss';
 
 // Restul codului CSS rămâne neschimbat
 .form-container {
   padding: 20px;
   // ...
 } 
+
+.form-container {
+  background: $background-white-color;
+  padding: 2.5rem;
+  border-radius: $border-radius-10;
+  margin: 2rem auto;
+  width: 500px;
+  box-shadow: 
+    rgba(17, 17, 26, 0.05) 0px 4px 16px,
+    rgba(17, 17, 26, 0.05) 0px 8px 32px;
+  transition: $transition;
+  
+  &:hover {
+    box-shadow: 
+      rgba(17, 17, 26, 0.1) 0px 4px 16px,
+      rgba(17, 17, 26, 0.1) 0px 8px 32px;
+  }
+}
+
+.form-control {
+  border: none;
+  background: #f8f9fa;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1.2rem;
+  border-radius: $border-radius-05;
+  transition: $transition;
+  font-family: $font-quicksand;
+  
+  &:focus {
+    background: white;
+    box-shadow: 
+      inset 0 -2px 0 $secondary-color,
+      0 2px 8px rgba(147, 183, 149, 0.1);
+    outline: none;
+  }
+  
+  &::placeholder {
+    color: lighten($text-color-dark, 40%);
+    font-weight: 300;
+  }
+}
+
+.custom-file-upload {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.2rem;
+  padding: 0.8rem 1rem;
+  background: #f8f9fa;
+  border-radius: $border-radius-05;
+  transition: $transition;
+  
+  &:hover {
+    background: white;
+    box-shadow: 0 2px 8px rgba(147, 183, 149, 0.1);
+  }
+}
+
+.custom-file-upload .btn-secondary {
+  margin: 0;
+  padding: 5px 10px;
+  height: fit-content;
+}
+
+.custom-file-upload #fileName {
+  margin-left: 10px;
+  margin-bottom: 0;
+  padding: 0;
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: $font-quicksand;
+}
+
+.btn-secondary {
+  background-color: $secondary-color;
+  color: $text-color;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: $border-radius-05;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: $font-quicksand;
+  transition: $transition;
+  
+  &:hover {
+    background-color: darken($secondary-color, 5%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(147, 183, 149, 0.2);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+#addBusiness {
+  justify-content: center;
+}
+
+.form-control:focus {
+  box-shadow: none;
+  border-color: $secondary-color;
+}
+
+.custom-file-upload label.tb {
+  margin: 0;
+}
+
+/* Stilizare pentru Toastify */
+.Toastify__toast {
+    font-family: $font-quicksand;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.Toastify__toast--error {
+    background: $background-white-color;
+    color: #dc3545;
+    border: 1px solid #dc3545;
+    font-family: inherit;
+}
+
+.Toastify__toast--success {
+    background: $background-white-color;
+    color: $secondary-color;
+    border: 1px solid $secondary-color;
+    font-family: inherit;
+}
+
+.Toastify__toast-container--bottom-right {
+    bottom: 3em !important;
+    right: 2em !important;
+}
+
+.add-business-container {
+  max-width: $contentWidth;
+  margin: 2rem auto;
+  padding: $auto-padding-5;
+}
+
+.header-section {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding-top: 2.5rem;
+}
+
+.main-title {
+  font-size: 3.2rem;
+  color: $text-color-dark;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  font-family: $font-quicksand;
+  position: relative;
+  display: inline-block;
+  letter-spacing: 1px;
+  animation: titleAppear 0.8s ease-out forwards;
+  transition: $transition;
+  cursor: default;
+  user-select: none;
+  
+  &:hover {
+    transform: scale(1.02);
+    color: darken($secondary-color, 10%);
+    
+    &::after {
+      width: 90%;
+      background: linear-gradient(to right, 
+        transparent, 
+        darken($secondary-color, 10%) 20%, 
+        darken($secondary-color, 10%) 80%, 
+        transparent
+      );
+    }
+    
+    &::before {
+      width: 50px;
+      opacity: 1;
+    }
+  }
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 4px;
+    background: linear-gradient(to right, 
+      transparent, 
+      $secondary-color 20%, 
+      $secondary-color 80%, 
+      transparent
+    );
+    border-radius: $border-radius-100;
+    transition: $transition;
+  }
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 4px;
+    background: $secondary-color;
+    border-radius: $border-radius-100;
+    opacity: 0.7;
+    transition: $transition;
+  }
+}
+
+.form-container {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  margin-top: 50px;
+}
+
+@keyframes titleAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -2,7 +2,9 @@ import { useState, useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './boostrap-design/assets/bootstrap/css/bootstrap.min.css';
-import './boostrap-design/assets/css/styles.css';
+
+import './boostrap-design/assets/css/styles.scss';
+import './boostrap-design/assets/css/styles.scss';
 
 const API_BASE_URL = 'https://estiaproject-b3ef95234cdd.herokuapp.com/api/v1/business';
 
@@ -90,10 +92,40 @@ export default function AddBusiness() {
         return true;
     };
 
+    const getCoordinates = async (address) => {
+        try {
+            const query = encodeURIComponent(
+                `${address.streetNbr} ${address.streetName}, ${address.city}, ${address.country}`
+            );
+            const response = await fetch(
+                `https://nominatim.openstreetmap.org/search?format=json&q=${query}&limit=1`
+            );
+            const data = await response.json();
+            
+            if (data && data.length > 0) {
+                return {
+                    latitude: parseFloat(data[0].lat),
+                    longitude: parseFloat(data[0].lon)
+                };
+            }
+            throw new Error('No coordinates found for this address');
+        } catch (error) {
+            console.error('Error getting coordinates:', error);
+            throw error;
+        }
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (validateForm()) {
             try {
+                const coordinates = await getCoordinates({
+                    streetNbr: formData.streetNbr,
+                    streetName: formData.streetName,
+                    city: formData.city,
+                    country: formData.country
+                });
+
                 const payload = {
                     name: formData.name.trim(),
                     description: formData.description.trim(),
@@ -101,11 +133,13 @@ export default function AddBusiness() {
                     city: formData.city.trim(),
                     streetName: formData.streetName.trim(),
                     streetNbr: parseInt(formData.streetNbr),
-                    postalCode: formData.postalCode
+                    postalCode: formData.postalCode,
+                    latitude: coordinates.latitude,
+                    longitude: coordinates.longitude
                 };
 
                 console.log('Sending payload:', payload);
-ß
+
                 const businessResponse = await fetch(`${API_BASE_URL}/add/new`, {
                     method: 'POST',
                     headers: {
@@ -114,32 +148,41 @@ export default function AddBusiness() {
                     body: JSON.stringify(payload)
                 });
 
-                console.log('Response status:', businessResponse.status);
-                const responseText = await businessResponse.text();
-                console.log('Response body:', responseText);
-
-                let responseData;
-                try {
-                    responseData = JSON.parse(responseText);
-                } catch (e) {
-                    throw new Error(`Server error: ${responseText}`);
-                }
-
                 if (!businessResponse.ok) {
-                    throw new Error(responseData.message || `Server error: ${businessResponse.status}`);
+                    throw new Error('Failed to create business');
                 }
 
-                if (file) {
-                    const formDataForImage = new FormData();
-                    formDataForImage.append('picture', file);
+                const businessData = await businessResponse.json();
+                console.log('Server response:', businessData);
 
-                    const imageResponse = await fetch(`${API_BASE_URL}/uploadImageToBusiness/?idBusiness=${responseData.id}&isPrimary=1`, {
-                        method: 'POST',
-                        body: formDataForImage
-                    });
+                // check if the response is an object
+                if (businessData && typeof businessData === 'object') {
+                    console.log('Response keys:', Object.keys(businessData));
+                    // check if the id is stored under a different name
+                    const possibleId = businessData.id || businessData.businessId || businessData.business_id;
+                    
+                    if (possibleId) {
+                        // continue with the image upload
+                        if (file) {
+                            const formDataForImage = new FormData();
+                            formDataForImage.append('picture', file);
 
-                    if (!imageResponse.ok) {
-                        console.warn('Failed to upload image, but business was created');
+                            console.log('Uploading image for business ID:', possibleId);
+
+                            const imageResponse = await fetch(
+                                `${API_BASE_URL}/uploadImageToBusiness/?idBusiness=${possibleId}&isPrimary=1`,
+                                {
+                                    method: 'POST',
+                                    body: formDataForImage
+                                }
+                            );
+
+                            const imageResult = await imageResponse.json();
+                            console.log('Image upload result:', imageResult);
+                        }
+                    } else {
+                        console.error('Response structure:', businessData);
+                        throw new Error('Business created but ID not found in response');
                     }
                 }
 
@@ -155,15 +198,21 @@ export default function AddBusiness() {
                 });
                 setFile(null);
                 setFileName('No file chosen');
+
             } catch (error) {
-                console.error('Detailed error:', error);
-                toast.error(`Failed to add business: ${error.message}`);
+                console.error('Error:', error);
+                toast.error(error.message);
             }
         }
     };
 
     return (
-        <>
+        <div className="add-business-container">
+            <div className="header-section">
+                <h1 className="main-title">Add Your Business</h1>
+                {/* <p className="subtitle">Join our community by listing your business in our directory</p> */}
+            </div>
+            
             <form className="form-container" onSubmit={handleSubmit}>
                 <input
                     className="form-control"
@@ -251,6 +300,7 @@ export default function AddBusiness() {
                     Submit
                 </button>
             </form>
+            
             <ToastContainer
                 position="bottom-right"
                 autoClose={3000}
@@ -263,6 +313,6 @@ export default function AddBusiness() {
                 pauseOnHover
                 theme="light"
             />
-        </>
+        </div>
     );
 }
