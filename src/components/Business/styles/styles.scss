@@ -1,5 +1,5 @@
 @use 'sass:color';
-@use '../../../../../styles/_variables' as *;
+@use '../../../styles/_variables' as *;
 
 // Restul codului CSS rămâne neschimbat
 .form-container {
@@ -48,9 +48,19 @@ select {
     outline: none;
   }
   
-  &::placeholder {
-    color: color.adjust($text-color-dark, $lightness: 40%);
-    font-weight: 300;
+  @media screen and (max-width: 768px) {
+    font-size: 14px;
+    padding: 0.7rem 0.9rem;
+  }
+
+  @media screen and (max-width: 480px) {
+    font-size: 13px;
+    padding: 0.6rem 0.8rem;
+  }
+
+  @media screen and (min-width: 769px) {
+    font-size: 16px;
+    padding: 0.8rem 1rem;
   }
 }
 
@@ -65,6 +75,18 @@ select {
   &:required:invalid {
     color: color.adjust($text-color-dark, $lightness: 40%);
     font-weight: 300;
+
+    @media screen and (max-width: 768px) {
+      font-size: 14px;
+    }
+
+    @media screen and (max-width: 480px) {
+      font-size: 13px;
+    }
+
+    @media screen and (min-width: 769px) {
+      font-size: 16px;
+    }
   }
   
   // Hide the placeholder option when dropdown is open
@@ -76,6 +98,18 @@ select {
   option {
     color: $text-color-dark;
     font-weight: normal;
+
+    @media screen and (max-width: 768px) {
+      font-size: 14px;
+    }
+
+    @media screen and (max-width: 480px) {
+      font-size: 13px;
+    }
+
+    @media screen and (min-width: 769px) {
+      font-size: 16px;
+    }
   }
 }
 
@@ -111,6 +145,18 @@ select {
     &.has-file {
       color: $text-color-dark;
       font-weight: normal;
+    }
+
+    @media screen and (max-width: 768px) {
+      font-size: 14px;
+    }
+
+    @media screen and (max-width: 480px) {
+      font-size: 13px;
+    }
+
+    @media screen and (min-width: 769px) {
+      font-size: 16px;
     }
   }
 }
@@ -274,4 +320,91 @@ select {
   max-width: $contentWidth;
   margin: 2rem auto;
   padding: $auto-padding-5;
+}
+
+/* Media queries for form inputs and placeholders */
+.form-control,
+select {
+  &::placeholder {
+    color: color.adjust($text-color-dark, $lightness: 40%);
+    font-weight: 300;
+
+    @media screen and (max-width: 768px) {
+      font-size: 14px;
+    }
+
+    @media screen and (max-width: 480px) {
+      font-size: 13px;
+    }
+
+    @media screen and (min-width: 769px) {
+      font-size: 16px;
+    }
+  }
+}
+
+/* Adjust file upload text size */
+.custom-file-upload {
+  #fileName {
+    @media screen and (max-width: 768px) {
+      font-size: 14px;
+    }
+
+    @media screen and (max-width: 480px) {
+      font-size: 13px;
+    }
+
+    @media screen and (min-width: 769px) {
+      font-size: 16px;
+    }
+  }
+}
+
+/* Adjust select placeholder and options */
+select {
+  &:required:invalid {
+    @media screen and (max-width: 768px) {
+      font-size: 14px;
+    }
+
+    @media screen and (max-width: 480px) {
+      font-size: 13px;
+    }
+
+    @media screen and (min-width: 769px) {
+      font-size: 16px;
+    }
+  }
+
+  option {
+    @media screen and (max-width: 768px) {
+      font-size: 14px;
+    }
+
+    @media screen and (max-width: 480px) {
+      font-size: 13px;
+    }
+
+    @media screen and (min-width: 769px) {
+      font-size: 16px;
+    }
+  }
+}
+
+/* Adjust form container width for different screens */
+.form-container {
+  @media screen and (max-width: 768px) {
+    width: 90%;
+    padding: 2rem 1.5rem;
+  }
+
+  @media screen and (max-width: 480px) {
+    width: 95%;
+    padding: 1.5rem 1rem;
+  }
+
+  @media screen and (min-width: 769px) {
+    width: 500px;
+    padding: 2.5rem;
+  }
 }

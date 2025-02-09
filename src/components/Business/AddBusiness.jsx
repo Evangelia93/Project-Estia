@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import './boostrap-design/assets/bootstrap/css/bootstrap.min.css';
 
-import './boostrap-design/assets/css/styles.scss';
-import './boostrap-design/assets/css/styles.scss';
+
+import './styles/styles.scss';
 const API_BASE_URL = 'https://estiaproject-b3ef95234cdd.herokuapp.com/api/v1/business';
 
 export default function AddBusiness() {
