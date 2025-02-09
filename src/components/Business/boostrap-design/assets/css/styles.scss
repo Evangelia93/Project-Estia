@@ -1,4 +1,5 @@
-@import '../../../../../styles/_variables.scss';
+@use 'sass:color';
+@use '../../../../../styles/_variables' as *;
 
 // Restul codului CSS rămâne neschimbat
 .form-container {
@@ -6,6 +7,7 @@
   // ...
 } 
 
+/* Main form container styling */
 .form-container {
   background: $background-white-color;
   padding: 2.5rem;
@@ -24,7 +26,9 @@
   }
 }
 
-.form-control {
+/* Input fields and select styling */
+.form-control,
+select {
   border: none;
   background: #f8f9fa;
   padding: 0.8rem 1rem;
@@ -32,6 +36,9 @@
   border-radius: $border-radius-05;
   transition: $transition;
   font-family: $font-quicksand;
+  width: 100%;
+  appearance: none;
+  color: $text-color-dark;
   
   &:focus {
     background: white;
@@ -42,11 +49,37 @@
   }
   
   &::placeholder {
-    color: lighten($text-color-dark, 40%);
+    color: color.adjust($text-color-dark, $lightness: 40%);
     font-weight: 300;
   }
 }
 
+/* Custom select dropdown styling */
+select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 8.825L1.175 4 2.238 2.938 6 6.7l3.763-3.763L10.825 4z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-right: 2.5rem;
+  
+  // Placeholder styling
+  &:required:invalid {
+    color: color.adjust($text-color-dark, $lightness: 40%);
+    font-weight: 300;
+  }
+  
+  // Hide the placeholder option when dropdown is open
+  option[value=""][disabled] {
+    display: none;
+  }
+  
+  // Style for actual options
+  option {
+    color: $text-color-dark;
+    font-weight: normal;
+  }
+}
+
+/* File upload section styling */
 .custom-file-upload {
   display: flex;
   align-items: center;
@@ -60,25 +93,29 @@
     background: white;
     box-shadow: 0 2px 8px rgba(147, 183, 149, 0.1);
   }
+
+  // File name display styling
+  #fileName {
+    margin-left: 10px;
+    margin-bottom: 0;
+    padding: 0;
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: color.adjust($text-color-dark, $lightness: 40%);
+    font-weight: 300;
+    font-family: $font-quicksand;
+    
+    // Style when a file is selected
+    &.has-file {
+      color: $text-color-dark;
+      font-weight: normal;
+    }
+  }
 }
 
-.custom-file-upload .btn-secondary {
-  margin: 0;
-  padding: 5px 10px;
-  height: fit-content;
-}
-
-.custom-file-upload #fileName {
-  margin-left: 10px;
-  margin-bottom: 0;
-  padding: 0;
-  max-width: 200px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  font-family: $font-quicksand;
-}
-
+/* Submit button styling */
 .btn-secondary {
   background-color: $secondary-color;
   color: $text-color;
@@ -91,7 +128,7 @@
   transition: $transition;
   
   &:hover {
-    background-color: darken($secondary-color, 5%);
+    background-color: color.adjust($secondary-color, $lightness: -5%);
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(147, 183, 149, 0.2);
   }
@@ -101,13 +138,106 @@
   }
 }
 
-#addBusiness {
-  justify-content: center;
+/* Title section animation and styling */
+@keyframes titleAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.form-control:focus {
-  box-shadow: none;
-  border-color: $secondary-color;
+.header-section {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding-top: 2.5rem;
+}
+
+/* Main title styling with hover effects */
+.main-title {
+  font-size: 3.2rem;
+  color: $text-color-dark;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  font-family: $font-quicksand;
+  position: relative;
+  display: inline-block;
+  letter-spacing: 1px;
+  animation: titleAppear 0.8s ease-out forwards;
+  transition: $transition;
+  cursor: default;
+  user-select: none;
+  
+  &:hover {
+    transform: scale(1.02);
+    color: color.adjust($secondary-color, $lightness: -10%);
+    
+    &::after {
+      width: 90%;
+      background: linear-gradient(to right, 
+        transparent, 
+        color.adjust($secondary-color, $lightness: -10%) 20%, 
+        color.adjust($secondary-color, $lightness: -10%) 80%, 
+        transparent
+      );
+    }
+    
+    &::before {
+      width: 50px;
+      opacity: 1;
+    }
+  }
+  
+  // Decorative line below title
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 4px;
+    background: linear-gradient(to right, 
+      transparent, 
+      $secondary-color 20%, 
+      $secondary-color 80%, 
+      transparent
+    );
+    border-radius: $border-radius-100;
+    transition: $transition;
+  }
+  
+  // Decorative line above title
+  &::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 4px;
+    background: $secondary-color;
+    border-radius: $border-radius-100;
+    opacity: 0.7;
+    transition: $transition;
+  }
+}
+
+.form-container {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  margin-top: 50px;
+}
+
+.custom-file-upload .btn-secondary {
+  margin: 0;
+  padding: 5px 10px;
+  height: fit-content;
 }
 
 .custom-file-upload label.tb {
@@ -144,96 +274,4 @@
   max-width: $contentWidth;
   margin: 2rem auto;
   padding: $auto-padding-5;
-}
-
-.header-section {
-  text-align: center;
-  margin-bottom: 3rem;
-  padding-top: 2.5rem;
-}
-
-.main-title {
-  font-size: 3.2rem;
-  color: $text-color-dark;
-  margin-bottom: 1rem;
-  font-weight: 700;
-  font-family: $font-quicksand;
-  position: relative;
-  display: inline-block;
-  letter-spacing: 1px;
-  animation: titleAppear 0.8s ease-out forwards;
-  transition: $transition;
-  cursor: default;
-  user-select: none;
-  
-  &:hover {
-    transform: scale(1.02);
-    color: darken($secondary-color, 10%);
-    
-    &::after {
-      width: 90%;
-      background: linear-gradient(to right, 
-        transparent, 
-        darken($secondary-color, 10%) 20%, 
-        darken($secondary-color, 10%) 80%, 
-        transparent
-      );
-    }
-    
-    &::before {
-      width: 50px;
-      opacity: 1;
-    }
-  }
-  
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: -12px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80%;
-    height: 4px;
-    background: linear-gradient(to right, 
-      transparent, 
-      $secondary-color 20%, 
-      $secondary-color 80%, 
-      transparent
-    );
-    border-radius: $border-radius-100;
-    transition: $transition;
-  }
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: -20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 40px;
-    height: 4px;
-    background: $secondary-color;
-    border-radius: $border-radius-100;
-    opacity: 0.7;
-    transition: $transition;
-  }
-}
-
-.form-container {
-  background: white;
-  padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-  margin-top: 50px;
-}
-
-@keyframes titleAppear {
-  0% {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }

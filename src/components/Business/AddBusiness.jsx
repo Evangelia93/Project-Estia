@@ -1,11 +1,10 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './boostrap-design/assets/bootstrap/css/bootstrap.min.css';
 
 import './boostrap-design/assets/css/styles.scss';
 import './boostrap-design/assets/css/styles.scss';
-
 const API_BASE_URL = 'https://estiaproject-b3ef95234cdd.herokuapp.com/api/v1/business';
 
 export default function AddBusiness() {
@@ -47,71 +46,56 @@ export default function AddBusiness() {
     }, []);
 
     const handleInputChange = (e) => {
-        const { id, value } = e.target;
+        const { name, value } = e.target;
         
-        if (id === 'streetNbr' || id === 'postalCode') {
+        if (name === 'streetNbr' || name === 'postalCode') {
             const numericValue = value.replace(/\D/g, '');
             setFormData(prev => ({
                 ...prev,
-                [id]: numericValue
+                [name]: numericValue
             }));
         } else {
             setFormData(prev => ({
                 ...prev,
-                [id]: value
+                [name]: value
             }));
         }
     };
 
-
     const handleFileChange = (e) => {
-        const file = e.target.files[0];
-        setFile(file);
-        setFileName(file ? file.name : 'No file chosen');
+        const selectedFile = e.target.files[0];
+        setFile(selectedFile);
+        setFileName(selectedFile ? selectedFile.name : 'No file chosen');
     };
 
-
     const validateForm = () => {
-        const requiredFields = {
-            name: 'Name',
-            description: 'Description',
-            country: 'Country',
-            city: 'City',
-            streetName: 'Street',
-            streetNbr: 'Street Number',
-            postalCode: 'Postal Code'
-        };
-
-        for (const [key, label] of Object.entries(requiredFields)) {
-            if (!formData[key]) {
-                toast.error(`Please fill the ${label} field`);
+        const requiredFields = ['name', 'description', 'country', 'city', 'streetName', 'streetNbr', 'postalCode'];
+        for (const field of requiredFields) {
+            if (!formData[field]) {
+                toast.error(`Please fill in the ${field.replace(/([A-Z])/g, ' $1').toLowerCase()}`);
                 return false;
             }
         }
-
         return true;
     };
 
     const getCoordinates = async (address) => {
         try {
-            const query = encodeURIComponent(
-                `${address.streetNbr} ${address.streetName}, ${address.city}, ${address.country}`
-            );
             const response = await fetch(
-                `https://nominatim.openstreetmap.org/search?format=json&q=${query}&limit=1`
+                `https://geocode.maps.co/search?street=${address.streetNbr}+${address.streetName}&city=${address.city}&country=${address.country}`
             );
             const data = await response.json();
             
-            if (data && data.length > 0) {
+            if (data && data[0]) {
                 return {
                     latitude: parseFloat(data[0].lat),
                     longitude: parseFloat(data[0].lon)
                 };
             }
-            throw new Error('No coordinates found for this address');
+            throw new Error('Could not get coordinates');
         } catch (error) {
             console.error('Error getting coordinates:', error);
-            throw error;
+            return { latitude: 0, longitude: 0 };
         }
     };
 
@@ -155,34 +139,26 @@ export default function AddBusiness() {
                 const businessData = await businessResponse.json();
                 console.log('Server response:', businessData);
 
-                // check if the response is an object
                 if (businessData && typeof businessData === 'object') {
                     console.log('Response keys:', Object.keys(businessData));
-                    // check if the id is stored under a different name
                     const possibleId = businessData.id || businessData.businessId || businessData.business_id;
                     
-                    if (possibleId) {
-                        // continue with the image upload
-                        if (file) {
-                            const formDataForImage = new FormData();
-                            formDataForImage.append('picture', file);
+                    if (possibleId && file) {
+                        const formDataForImage = new FormData();
+                        formDataForImage.append('picture', file);
 
-                            console.log('Uploading image for business ID:', possibleId);
+                        console.log('Uploading image for business ID:', possibleId);
 
-                            const imageResponse = await fetch(
-                                `${API_BASE_URL}/uploadImageToBusiness/?idBusiness=${possibleId}&isPrimary=1`,
-                                {
-                                    method: 'POST',
-                                    body: formDataForImage
-                                }
-                            );
+                        const imageResponse = await fetch(
+                            `${API_BASE_URL}/uploadImageToBusiness/?idBusiness=${possibleId}&isPrimary=1`,
+                            {
+                                method: 'POST',
+                                body: formDataForImage
+                            }
+                        );
 
-                            const imageResult = await imageResponse.json();
-                            console.log('Image upload result:', imageResult);
-                        }
-                    } else {
-                        console.error('Response structure:', businessData);
-                        throw new Error('Business created but ID not found in response');
+                        const imageResult = await imageResponse.json();
+                        console.log('Image upload result:', imageResult);
                     }
                 }
 
@@ -210,7 +186,6 @@ export default function AddBusiness() {
         <div className="add-business-container">
             <div className="header-section">
                 <h1 className="main-title">Add Your Business</h1>
-                {/* <p className="subtitle">Join our community by listing your business in our directory</p> */}
             </div>
             
             <form className="form-container" onSubmit={handleSubmit}>
@@ -219,6 +194,7 @@ export default function AddBusiness() {
                     type="text"
                     id="name"
                     placeholder="Name"
+                    name="name"
                     value={formData.name}
                     onChange={handleInputChange}
                 />
@@ -227,17 +203,21 @@ export default function AddBusiness() {
                     type="text"
                     id="description"
                     placeholder="Description"
+                    name="description"
                     value={formData.description}
                     onChange={handleInputChange}
                 />
                 <select
                     className="form-control"
                     id="country"
+                    name="country"
                     value={formData.country}
                     onChange={handleInputChange}
                     disabled={isLoading}
+                    required
+                    defaultValue=""
                 >
-                    <option value="">Select a country</option>
+                    <option value="" disabled>Select a country</option>
                     {countries.map((country) => (
                         <option key={country} value={country}>
                             {country}
@@ -249,6 +229,7 @@ export default function AddBusiness() {
                     type="text"
                     id="city"
                     placeholder="City"
+                    name="city"
                     value={formData.city}
                     onChange={handleInputChange}
                 />
@@ -257,6 +238,7 @@ export default function AddBusiness() {
                     type="text"
                     id="streetName"
                     placeholder="Street"
+                    name="streetName"
                     value={formData.streetName}
                     onChange={handleInputChange}
                 />
@@ -265,6 +247,7 @@ export default function AddBusiness() {
                     type="text"
                     id="streetNbr"
                     placeholder="Street number"
+                    name="streetNbr"
                     value={formData.streetNbr}
                     onChange={handleInputChange}
                 />
@@ -273,6 +256,7 @@ export default function AddBusiness() {
                     type="text"
                     id="postalCode"
                     placeholder="Postal code"
+                    name="postalCode"
                     value={formData.postalCode}
                     onChange={handleInputChange}
                 />
@@ -280,14 +264,14 @@ export default function AddBusiness() {
                 <div className="custom-file-upload">
                     <input
                         type="file"
-                        id="fileInput"
-                        style={{ display: 'none' }}
+                        id="file"
                         onChange={handleFileChange}
+                        style={{ display: 'none' }}
                     />
-                    <label htmlFor="fileInput" className="btn btn-secondary">
-                        Choose File
-                    </label>
-                    <span id="fileName">{fileName}</span>
+                    <label htmlFor="file" className="btn btn-secondary">Choose File</label>
+                    <p id="fileName" className={file ? 'has-file' : ''}>
+                        {fileName}
+                    </p>
                 </div>
 
                 {error && <div className="text-danger">{error}</div>}
