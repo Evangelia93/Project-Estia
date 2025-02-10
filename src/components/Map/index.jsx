@@ -24,8 +24,6 @@ function Map({ longitude, latitude }) {
             const marker = L.marker([latitude, longitude]).addTo(map).bindPopup(`${longitude}, ${latitude}`).openPopup();
 
         }
-      });
-
         return () => {
             if (map) {
                 map.remove();
