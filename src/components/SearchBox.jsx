@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "reactjs-popup/dist/index.css";
-import "../styles/modal.css";
 import FilterModal from "./FilterModal";
 import { useNavigate } from "react-router-dom";
 import SortBy from "./SortBy";
@@ -54,15 +53,6 @@ function SearchBox() {
       </div>
       
       <hr className="searchbox-separator"/>
-
-      <div className="filter-sort-container">
-        <button className="filter-button button" onClick={toggleFilterModal}>
-          Filters
-        </button>
-        <button className="sort-button button" onClick={toggleSortByModal}>
-          Sort By
-        </button>
-      </div>
 
       {isFilterModalOpen && (
         <FilterModal

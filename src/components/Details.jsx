@@ -1,76 +1,62 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { fetchAddresses, fetchBusinesses } from '../api/businesses';
+import '../styles/home.scss'
+import { Link } from 'react-router-dom';
+import 'leaflet/dist/leaflet.css';
 import Map from './Map';
-import HeartButton from './HeartButton';
-import StarButton from './StarButton';
-import img1 from '../assets/cafe_spots/1.jpeg';
-import img2 from '../assets/cafe_spots/2.jpeg';
-import img3 from '../assets/cafe_spots/3.jpeg';
-import img4 from '../assets/cafe_spots/4.jpeg';
-import img5 from '../assets/cafe_spots/5.jpeg';
-import img6 from '../assets/cafe_spots/6.jpeg';
-import img7 from '../assets/cafe_spots/7.jpeg';
-import img8 from '../assets/cafe_spots/8.jpeg';
-import img9 from '../assets/cafe_spots/9.jpeg';
-import img10 from '../assets/cafe_spots/10.jpeg';
-import img11 from '../assets/cafe_spots/11.jpeg';
-import img12 from '../assets/cafe_spots/12.jpeg';
-const images = [img1, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11, img12];
+
 function Details({ combinedData }) {
   const [currentIndex, setCurrentIndex] = useState(null);
+  const [addresses, setAddresses] = useState([]);
 
-  const businessesWithImages = combinedData.map((business, index) => ({
-    ...business,
-    imageUrl: images[index % images.length], 
-  }));
+  const [longitude, setLongitude] = useState(0)
+  const [lattitude, setLatitude] = useState(0)
+
+  const seedLocation = (long, lat) => {
+    setLongitude(long)
+    setLatitude(lat)
+
+    console.log('LONGITUDE : ', long)
+    console.log('LATITUDE : ', lat)
+  }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const addresses = await fetchBusinesses();
+      setAddresses(addresses);
+      console.log('ADRESSES: ', addresses);
+    }
+
+    fetchData();
+  }, [])
 
   return (
-    <div className="content-container">
-      <div className="left-content">
-        <div className="businesses-container">
-          {businessesWithImages.map((business, index) => (
-            <div
-              key={index}
-              className="business-card"
-              onClick={() => setCurrentIndex(index)}
-            >
-              <img
-                src={business.imageUrl}
-                alt={business.name}
-                className="business-image"
-              />
-              <div className="business-content">
-                <h2>{business.name}</h2>
-                <p>{business.description || "No description available"}</p>
-                <p>
-                  <b>Address:</b> {business.road_name}, {business.city}
-                </p>
+    <>
+      <div className="addresses-wrapper">
+        <div className="addresses-container">
+          {addresses.map((address) => (
+            <div key={address.id} className="addresses-card">
+              <div className="card-img-container">
+                <img className='card-img' src={address.image_path} alt="" />
               </div>
-              <div className="button-container">
-                <HeartButton business={business} />
-                <StarButton business={business} />
+              <div className="card-infos-container">
+                <Link className="card-name" onClick={() => seedLocation(address.longitude, address.latitude)}>{address.name}</Link>
+                {/* <p className="card-desc">{address.description}</p> */}
+                <p className="card-address">
+                  <i className="fa-solid fa-location-dot"></i> {`${address.number}, ${address.road_name}`}</p>
+                <p className="card-city">
+                  {`${address.postal_code}, ${address.city}`}</p>
               </div>
             </div>
           ))}
         </div>
       </div>
-      <div className="right-content">
-        {!!combinedData && (
-          <Map
-            selectedLocation={
-              currentIndex !== null
-                ? [
-                    combinedData[currentIndex].latitude,
-                    combinedData[currentIndex].longitude,
-                  ]
-                : null
-            }
-            setCurrentIndex={setCurrentIndex}
-            combinedData={combinedData}
-          />
-        )}
-      </div>
-    </div>
-  );
+      <Map
+        longitude={longitude}
+        latitude={lattitude} />
+    </>
+
+  )
 }
 
 export default Details;

@@ -75,7 +75,22 @@ hr {
 .modal {
     @include center-position;
     position: fixed;
-    z-index: 1001;
+    z-index: 1050;
+    display: none;
+
+    &.active {
+        display: block;
+    }
+}
+
+.modal-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 1020;
 }
 
 .modal-wrapper {

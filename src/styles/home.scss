@@ -1,0 +1,69 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.addresses-wrapper {
+    margin: 80px 0;
+}
+
+.addresses-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.addresses-card {
+    border-radius: $border-radius-20;
+    // border-bottom: 2px solid $secondary-color;
+}
+
+.card-infos-container {
+    padding: 10px 0 30px 0; 
+}
+
+.card-img-container {
+    overflow: hidden;
+    border-radius: $border-radius-10;
+    height: 200px;
+    ;
+
+    .card-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform $transition;
+    }
+
+    &:hover {
+        .card-img {
+            transform: scale(1.05);
+        }
+    }
+}
+
+.card-desc,
+.card-address,
+.card-city {
+    margin: 0;
+    line-height: normal;
+    text-align: left;
+
+}
+
+.card-name {
+    @include link-properties;
+    @include font-properties(1.1em, 600);
+    color: $text-color-dark;
+    transition: color $transition;
+    &:hover {
+        color: $secondary-color;
+    }
+}
+
+.card-address {
+    margin-top: 10px;
+}
+
+.fa-location-dot {
+    color: $secondary-color;
+    margin-right: 2px;
+}

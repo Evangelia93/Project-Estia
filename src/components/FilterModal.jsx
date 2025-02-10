@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "../styles/modal.css";
 import RatingBar from "./RatingBar";
 import FilterCheckboxes from "./CheckBoxesFilter";
 
