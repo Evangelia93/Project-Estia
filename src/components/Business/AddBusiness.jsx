@@ -122,6 +122,8 @@ export default function AddBusiness() {
                 };
 
                 console.log('Sending payload:', payload);
+                console.log('latitude:', coordinates.latitude);
+                console.log('longitude:', coordinates.longitude);
 
                 const businessResponse = await fetch(`${API_BASE_URL}/add/new`, {
                     method: 'POST',
@@ -138,41 +140,44 @@ export default function AddBusiness() {
                 const businessData = await businessResponse.json();
                 console.log('Server response:', businessData);
 
-                if (businessData && typeof businessData === 'object') {
-                    console.log('Response keys:', Object.keys(businessData));
-                    const possibleId = businessData.id || businessData.businessId || businessData.business_id;
+                if (businessData && businessData.message === "Business added successfully") {
+                    const businessId = businessData.data.id;
                     
-                    if (possibleId && file) {
+                    if (businessId && file) {
                         const formDataForImage = new FormData();
                         formDataForImage.append('picture', file);
 
-                        console.log('Uploading image for business ID:', possibleId);
-
                         const imageResponse = await fetch(
-                            `${API_BASE_URL}/uploadImageToBusiness/?idBusiness=${possibleId}&isPrimary=1`,
+                            `${API_BASE_URL}/uploadImageToBusiness/?idBusiness=${businessId}&isPrimary=1`,
                             {
                                 method: 'POST',
                                 body: formDataForImage
                             }
                         );
 
+                        if (!imageResponse.ok) {
+                            throw new Error('Failed to upload image');
+                        }
+
                         const imageResult = await imageResponse.json();
                         console.log('Image upload result:', imageResult);
                     }
-                }
 
-                toast.success('Business added successfully!');
-                setFormData({
-                    name: '',
-                    description: '',
-                    country: '',
-                    city: '',
-                    streetName: '',
-                    streetNbr: '',
-                    postalCode: '',
-                });
-                setFile(null);
-                setFileName('No file chosen');
+                    toast.success('Business added successfully!');
+                    setFormData({
+                        name: '',
+                        description: '',
+                        country: '',
+                        city: '',
+                        streetName: '',
+                        streetNbr: '',
+                        postalCode: '',
+                    });
+                    setFile(null);
+                    setFileName('No file chosen');
+                } else {
+                    throw new Error('Invalid server response');
+                }
 
             } catch (error) {
                 console.error('Error:', error);

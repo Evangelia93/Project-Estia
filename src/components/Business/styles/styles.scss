@@ -1,6 +1,6 @@
 @use 'sass:color';
 @use '../../../styles/_variables' as *;
-
+@use '../../../styles/_mixins' as *;
 // Restul codului CSS rămâne neschimbat
 .form-container {
   padding: 20px;
@@ -317,9 +317,7 @@ select {
 }
 
 .add-business-container {
-  max-width: $contentWidth;
-  margin: 2rem auto;
-  padding: $auto-padding-5;
+  @include center-position;
 }
 
 /* Media queries for form inputs and placeholders */
