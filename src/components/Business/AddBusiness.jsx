@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
+import { toast } from 'react-toastify';
 
 import './styles/styles.scss';
 const API_BASE_URL = 'https://estiaproject-b3ef95234cdd.herokuapp.com/api/v1/business';
 
+// Component for adding a new business with form validation and image upload
 export default function AddBusiness() {
+    // Initialize form state with empty values
     const [formData, setFormData] = useState({
         name: '',
         description: '',
@@ -17,8 +17,9 @@ export default function AddBusiness() {
         postalCode: '',
     });
 
-    const [fileName, setFileName] = useState('No file chosen');
+    // State for handling file upload
     const [file, setFile] = useState(null);
+    const [fileName, setFileName] = useState('No file chosen');
     const [countries, setCountries] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -44,6 +45,7 @@ export default function AddBusiness() {
         fetchCountries();
     }, []);
 
+    // Handle input changes for all form fields
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         
@@ -61,20 +63,47 @@ export default function AddBusiness() {
         }
     };
 
+    // Handle file selection and update file name display
     const handleFileChange = (e) => {
         const selectedFile = e.target.files[0];
         setFile(selectedFile);
         setFileName(selectedFile ? selectedFile.name : 'No file chosen');
     };
 
+    // Validates all required fields including the image upload
     const validateForm = () => {
-        const requiredFields = ['name', 'description', 'country', 'city', 'streetName', 'streetNbr', 'postalCode'];
+        // Define required fields with their display labels
+        const requiredFields = [
+            { name: 'name', label: 'Name' },
+            { name: 'description', label: 'Description' },
+            { name: 'country', label: 'Country' },
+            { name: 'city', label: 'City' },
+            { name: 'streetName', label: 'Street Name' },
+            { name: 'postalCode', label: 'Postal Code' }
+        ];
+
+        // Check each required text field
         for (const field of requiredFields) {
-            if (!formData[field]) {
-                toast.error(`Please fill in the ${field.replace(/([A-Z])/g, ' $1').toLowerCase()}`);
+            if (!formData[field.name].trim()) {
+                toast.error(`Please fill in the ${field.label}`);
                 return false;
             }
         }
+
+        // Special validation for street number (numbers only)
+        const streetNbrPattern = /^\d+$/;
+        if (!formData.streetNbr.trim() || !streetNbrPattern.test(formData.streetNbr.trim())) {
+            toast.error('Street Number must contain only numbers');
+            return false;
+        }
+
+        // Check if an image has been selected
+        if (!file) {
+            toast.error('Please select an image for your business');
+            return false;
+        }
+
+        // All validations passed
         return true;
     };
 
@@ -115,7 +144,7 @@ export default function AddBusiness() {
                     country: formData.country,
                     city: formData.city.trim(),
                     streetName: formData.streetName.trim(),
-                    streetNbr: parseInt(formData.streetNbr),
+                    streetNbr: formData.streetNbr.trim(),
                     postalCode: formData.postalCode,
                     latitude: coordinates.latitude,
                     longitude: coordinates.longitude
@@ -193,33 +222,33 @@ export default function AddBusiness() {
             </div>
             
             <form className="form-container" onSubmit={handleSubmit}>
+                {/* Business name input */}
                 <input
-                    className="form-control"
                     type="text"
-                    id="name"
+                    className="form-control"
                     placeholder="Name"
                     name="name"
                     value={formData.name}
                     onChange={handleInputChange}
                 />
+
+                {/* Business description input */}
                 <input
-                    className="form-control"
                     type="text"
-                    id="description"
+                    className="form-control"
                     placeholder="Description"
                     name="description"
                     value={formData.description}
                     onChange={handleInputChange}
                 />
+
+                {/* Country selection dropdown */}
                 <select
-                    className="form-control"
-                    id="country"
-                    name="country"
-                    value={formData.country}
-                    onChange={handleInputChange}
-                    disabled={isLoading}
                     required
                     defaultValue=""
+                    name="country"
+                    onChange={handleInputChange}
+                    value={formData.country}
                 >
                     <option value="" disabled>Select a country</option>
                     {countries.map((country) => (
@@ -228,43 +257,48 @@ export default function AddBusiness() {
                         </option>
                     ))}
                 </select>
+
+                {/* City input */}
                 <input
-                    className="form-control"
                     type="text"
-                    id="city"
+                    className="form-control"
                     placeholder="City"
                     name="city"
                     value={formData.city}
                     onChange={handleInputChange}
                 />
+
+                {/* Street name input */}
                 <input
-                    className="form-control"
                     type="text"
-                    id="streetName"
+                    className="form-control"
                     placeholder="Street"
                     name="streetName"
                     value={formData.streetName}
                     onChange={handleInputChange}
                 />
+
+                {/* Street number input - numbers only */}
                 <input
+                    type="number"
                     className="form-control"
-                    type="text"
-                    id="streetNbr"
                     placeholder="Street number"
                     name="streetNbr"
                     value={formData.streetNbr}
                     onChange={handleInputChange}
                 />
+
+                {/* Postal code input */}
                 <input
-                    className="form-control"
                     type="text"
-                    id="postalCode"
+                    className="form-control"
                     placeholder="Postal code"
                     name="postalCode"
                     value={formData.postalCode}
                     onChange={handleInputChange}
                 />
 
+                {/* File upload section */}
                 <div className="custom-file-upload">
                     <input
                         type="file"
@@ -278,29 +312,11 @@ export default function AddBusiness() {
                     </p>
                 </div>
 
-                {error && <div className="text-danger">{error}</div>}
-
-                <button
-                    className="btn d-xl-flex btn-secondary"
-                    id="addBusiness"
-                    type="submit"
-                >
-                    Submit
+                {/* Submit button */}
+                <button type="submit" className="btn btn-secondary" id="addBusiness">
+                    Add Business
                 </button>
             </form>
-            
-            <ToastContainer
-                position="bottom-right"
-                autoClose={3000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme="light"
-            />
         </div>
     );
 }
