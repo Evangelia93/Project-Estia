@@ -13,7 +13,7 @@ export default function Header() {
             <ul className="navbar">
                 <li><Link to='/'>Home</Link></li>
                 <li><Link to='/about'>About</Link></li>
-                <li><Link to='/forum'>Forum</Link></li>
+                {/* <li><Link to='/forum'>Forum</Link></li> */}
                 <li><Link to='/business'>Business</Link></li>
                 <div >
                     <SignIn className="button"/>
