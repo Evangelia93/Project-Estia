@@ -13,4 +13,8 @@ html {
     overflow-x: hidden;
     scroll-behavior: smooth;
     transition: none;
+
+    &.no-scroll {
+        overflow: hidden;
+    }
 }

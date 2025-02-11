@@ -13,6 +13,7 @@ export default function SignIn() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
+  const [token, setToken] = useState('')
 
   // Handle Login
   const handleLogin = async (e) => {
@@ -30,14 +31,20 @@ export default function SignIn() {
         email,
         password,
       });
+      
       console.log('Login successful:', response.data);
+      setToken(response.data.token);
+
       setSuccessMessage('Login successful!');
       setError('');
     } catch (err) {
       console.error('Login error:', err);
       setError(err.response?.data?.error || 'Unknown Error');
       setSuccessMessage('');
+    } finally {
+      token ? window.localStorage.setItem('token', token) : ''; 
     }
+    
   };
 
   // Handle Sign Up

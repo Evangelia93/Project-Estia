@@ -6,7 +6,7 @@ import styles from './Map.module.css';
 // const defaultLocation = [50.8503, 4.3517]
 
 
-function Map({ longitude, latitude }) {
+function Map({ longitude, latitude, street }) {
 
     useEffect(() => {
         let map;
@@ -18,10 +18,7 @@ function Map({ longitude, latitude }) {
                 attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
             }).addTo(map);
 
-            console.log('LONGITUDE : ', longitude)
-            console.log('LATITUDE : ', latitude)
-
-            const marker = L.marker([latitude, longitude]).addTo(map).bindPopup(`${longitude}, ${latitude}`).openPopup();
+            const marker = L.marker([latitude, longitude]).addTo(map).bindPopup(street).openPopup();
 
         }
         return () => {
@@ -33,7 +30,7 @@ function Map({ longitude, latitude }) {
 
     return (
         <div className="leaflet-map">
-            <div id="map" className={styles.map} style={{ height: '300px' }}></div>
+            <div id="map" className={styles.map} style={{ height: '400px' }}></div>
         </div>
     )
 }
