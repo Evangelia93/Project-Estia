@@ -26,6 +26,15 @@ header {
 header .logo img {
   width: 100px;
 }
+@media screen and (max-width: 675px) {
+  header {
+    flex-direction: column;
+    margin-bottom: 30px;
+  }
+  header .logo img {
+    width: 80px;
+  }
+}
 
 .navbar {
   display: flex;

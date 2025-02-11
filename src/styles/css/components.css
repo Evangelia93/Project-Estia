@@ -67,6 +67,11 @@ hr {
   width: 50vw;
   outline: none;
 }
+@media screen and (max-width: 675px) {
+  .searchbox-wrapper input {
+    width: 60vw;
+  }
+}
 .searchbox-wrapper button {
   text-decoration: none;
   color: #fefefe;
@@ -153,4 +158,56 @@ hr {
 }
 .modal-container select:focus {
   outline: none;
+}
+
+.login-signup-modal {
+  width: 300px;
+}
+
+.login-form,
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.login-form h2,
+.signup-form h2 {
+  margin-bottom: 20px;
+}
+.login-form input,
+.signup-form input {
+  width: 200px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: width 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+  margin: 5px 0;
+}
+.login-form input:focus,
+.signup-form input:focus {
+  outline-color: #93B795;
+}
+.login-form button,
+.signup-form button {
+  margin-top: 20px;
+}
+.login-form a,
+.signup-form a {
+  text-decoration: none;
+  color: #fefefe;
+  font-weight: 500;
+  font-size: 1em;
+  color: #93B795;
+}
+
+.login-signup-button::before {
+  content: "Login / Sign Up";
+}
+
+@media screen and (max-width: 675px) {
+  .login-signup-button::before {
+    content: "\f007";
+    font-family: FontAwesome;
+  }
 }/*# sourceMappingURL=components.css.map */

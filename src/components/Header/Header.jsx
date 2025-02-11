@@ -15,7 +15,6 @@ export default function Header() {
                 <li><Link to='/about'>About</Link></li>
                 <li><Link to='/forum'>Forum</Link></li>
                 <li><Link to='/business'>Business</Link></li>
-                <li><Popup >Forum </Popup></li>
                 <div >
                     <SignIn className="button"/>
                 </div>

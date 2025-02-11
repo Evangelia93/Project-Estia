@@ -63,7 +63,15 @@ function Details() {
     fetchData();
   }, [searchTerm])
 
-  if (!filteredAddresses || filteredAddresses.length == 0) {
+  if (!filteredAddresses) {
+    return (
+      <>
+        <p>Loading</p>
+      </>
+    )
+  }
+
+  if (filteredAddresses.length == 0) {
     return (
       <>
         <SearchBox onClick={toggleFilterModal} />

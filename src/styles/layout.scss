@@ -10,6 +10,15 @@ header {
     .logo img {
         width: 100px;
     }
+
+    @media screen and (max-width: 675px) {
+        flex-direction: column;
+        margin-bottom: 30px;
+        .logo img {
+            width: 80px;
+        }
+        
+    }
 }
 
 .navbar {

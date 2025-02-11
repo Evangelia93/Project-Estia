@@ -54,6 +54,10 @@ hr {
             width: 50vw;
             outline: none;
         }
+
+        @media screen and (max-width: 675px) {
+            width: 60vw;
+        }
     }
     button {
         @include link-properties;
@@ -146,4 +150,53 @@ hr {
             outline: none;
         }
     }
+}
+
+// LOGIN/SIGNUP ======================================================================
+
+.login-signup-modal {
+    width: 300px;
+}
+
+.login-form,
+.signup-form{
+    @include flex-column-center;
+
+    h2 {
+        margin-bottom: 20px;
+    }
+
+    input {
+        width: 200px;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        padding: 5px 10px;
+        border-radius: $border-radius-05;
+        transition: width $transition;
+        margin: 5px 0;
+
+        &:focus {
+            outline-color: $secondary-color;
+        }
+    }
+
+    button {
+        margin-top: 20px;
+    }
+
+    a {
+        @include link-properties;
+        color: $secondary-color;
+    }
+}
+
+.login-signup-button::before {
+    content: 'Login / Sign Up';
+}
+
+@media  screen and (max-width: 675px) {
+    .login-signup-button::before {
+        content: '\f007';
+        font-family: FontAwesome;
+    }
+    
 }
