@@ -68,7 +68,7 @@ function ListContainer() {
 
   return (
     <div style={styles.pageContainer}>
-      <SearchBox />
+      
       <div style={styles.businessesContainer}>
         {filteredBusinesses.length > 0 ? (
           filteredBusinesses.map((business, index) => (

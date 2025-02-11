@@ -12,6 +12,7 @@ import "./styles/global.css"
 import AuthForm from './styles/old/SignIn.module.css'
 import Header from './components/Header/Header';
 import Business from './components/Business/Business';
+import Details from './components/Details';
 
 function Layout() {
   return (
@@ -65,7 +66,7 @@ function App() {
           <Route path="about" element={<About />} />
           <Route path="forum" element={<Forum combinedData={combinedData} />} />
           <Route path="popularcategories" element={<PopularCategories combinedData={combinedData} />} />
-          <Route path="listcontainer" element={<ListContainer combinedData={combinedData} />} />
+          <Route path="search" element={<Details />} />
           <Route path="signin" element={<AuthForm />} /> {/* Updated to use AuthForm */}
           <Route path="business" element={<Business />} /> 
         </Route>

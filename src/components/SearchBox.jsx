@@ -32,7 +32,7 @@ function SearchBox() {
       }
     });
 
-    navigate(`/listcontainer?${queryParams.toString()}`);
+    navigate(`/search/?${queryParams.toString()}`);
   };
 
   return (
@@ -46,7 +46,7 @@ function SearchBox() {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSearch()} />
-          <button className="searchbox-submit button" onClick={handleSearch}>
+          <button type="submit" className="searchbox-submit button" onClick={handleSearch}>
             <i className="fa-solid fa-magnifying-glass"></i>
           </button>
         </div>

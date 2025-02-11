@@ -1,19 +1,27 @@
 import { useEffect, useState } from 'react';
 import { fetchAddresses, fetchBusinesses } from '../api/businesses';
 import '../styles/home.scss'
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import 'leaflet/dist/leaflet.css';
 import Map from './Map';
+import SearchBox from './SearchBox';
+import Modal from './Modal';
+
+
 
 function Details() {
   const [addresses, setAddresses] = useState([]);
+  const [filteredAddresses, setFilteredAddresses] = useState([]);
 
   const [longitude, setLongitude] = useState(0)
   const [lattitude, setLatitude] = useState(0)
   const [street, setStreet] = useState('')
 
-
   const [isMapActive, setIsMapActive] = useState(false)
+
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const searchTerm = queryParams.get("search")?.toLowerCase() || "";
 
   const seedLocation = (long, lat, address) => {
     setLongitude(long)
@@ -33,26 +41,50 @@ function Details() {
     }
   }
 
+  const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);;
+
+  const toggleFilterModal = () => {
+    setIsFilterModalOpen((prev) => !prev);
+  };
+
+
   useEffect(() => {
     const fetchData = async () => {
       const addresses = await fetchBusinesses();
-      setAddresses(addresses);
+      setFilteredAddresses(addresses)
+      if (searchTerm.trim()) {
+        setFilteredAddresses(addresses.filter((address) =>
+          address.name.toLowerCase().includes(searchTerm)
+        ));
+      } 
       console.log('ADRESSES: ', addresses);
     }
 
     fetchData();
-  }, [])
+  }, [searchTerm])
+
+  if (!filteredAddresses || filteredAddresses.length == 0) {
+    return (
+      <>
+        <SearchBox onClick={toggleFilterModal} />
+        <i class="fa-solid fa-store-slash"></i>
+        <p>No results</p>
+      </>
+    )
+  }
 
   return (
     <>
+      <SearchBox onClick={toggleFilterModal} />
+      <Modal />
       <div className="addresses-wrapper">
         <div className="addresses-container">
-          {addresses.map((address) => (
+          {filteredAddresses.map((address) => (
             <div key={address.id} className="addresses-card">
               <div className="card-img-container" onClick={() => seedLocation(
-                      address.longitude,
-                      address.latitude,
-                      `${address.number}, ${address.road_name}, ${address.postal_code} ${address.city}`)}>
+                address.longitude,
+                address.latitude,
+                `${address.number}, ${address.road_name}, ${address.postal_code} ${address.city}`)}>
                 <div className="card-hover-info"></div>
                 <img className='card-img' src={address.image_path} alt="" />
               </div>
