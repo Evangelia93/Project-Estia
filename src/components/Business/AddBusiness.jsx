@@ -140,7 +140,7 @@ export default function AddBusiness() {
 
                 if (businessData && typeof businessData === 'object') {
                     console.log('Response keys:', Object.keys(businessData));
-                    const possibleId = businessData.id || businessData.businessId || businessData.business_id;
+                    const possibleId = businessData.data.id;
                     
                     if (possibleId && file) {
                         const formDataForImage = new FormData();
