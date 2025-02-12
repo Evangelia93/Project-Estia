@@ -422,18 +422,24 @@ category-image:hover {
 }
 /* ABOUT US */
 .about-us-container {
-  padding: 40px;
+  padding-bottom: 60px;
   border-radius: 15px;
   max-width: 800px;
   margin: 40px auto; 
   font-family: 'Quicksand', sans-serif; 
-  text-align: center;
+  text-align: left;
 }
 
 .about-us-title {
   font-size: 2.5rem;
   color: #4a4a4a; 
   margin-bottom: 20px;
+  text-align: center;
+  border-bottom: 4px solid #93b795;
+  width: fit-content;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .about-us-paragraph {
