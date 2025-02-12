@@ -89,7 +89,7 @@ function Details() {
   return (
     <>
       <SearchBox onClick={toggleFilterModal} />
-      <Modal />
+      <Modal addresses={filteredAddresses} />
       <div className="addresses-wrapper">
         <div className="addresses-container">
           {filteredAddresses.map((address) => (

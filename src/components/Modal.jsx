@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 
-export default function Modal() {
+export default function Modal({addresses}) {
 
     const [selectedButtons, setSelectedButtons] = useState([]);
     const [isModalActive, setIsModalActive] = useState(false);
+    const [postalCode, setPostalCode] = useState([]);
 
     function toggleModal() {
         setIsModalActive(!isModalActive);
@@ -20,10 +21,18 @@ export default function Modal() {
         }
     }
 
+    function filterPostalCode() {
+        const uniquePostalCodes = [...new Set(addresses.map((address) => address.postal_code))];
+        setPostalCode(uniquePostalCodes);
+    }
+
+    useEffect(() => {
+        filterPostalCode();
+    }, [])
+
     const meal_options = ['Breakfast', 'Lunch', 'Brunch', 'Dinner', 'Cafe'];
     const playground_options = ['Indoor', 'Outdoor'];
     const feature_options = ['Animators', 'Pets Allowed', 'Parking', 'Wheelchair friendly'];
-    const postal_codes = ['1000', '1030', '1050', '1090'];
 
     const ButtonGroup = ({ options, category, onClick }) => (
         <div className={`${category}-container`}>
@@ -62,8 +71,8 @@ export default function Modal() {
                             <label>Location</label>
                             <select defaultValue="" name="postal-code" id="postal-code">
                                 <option value="" disabled>Select postal code</option>
-                                {postal_codes.map(code => (
-                                    <option key={code} value={code}>{code}</option>
+                                {postalCode.map((code, i) => (
+                                    <option key={i} value={code}>{code}</option>
                                 ))}
                             </select>
                         </div>
