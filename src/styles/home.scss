@@ -1,0 +1,136 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+@use 'reset' as *;
+
+.addresses-wrapper {
+    margin: 80px 0;
+}
+
+.addresses-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.addresses-card {
+    border-radius: $border-radius-20;
+    // border-bottom: 2px solid $secondary-color;
+}
+
+.card-infos-container {
+    padding: 10px 0 30px 0;
+}
+
+.card-img-container {
+    overflow: hidden;
+    border-radius: $border-radius-10;
+    height: 200px;
+    position: relative;
+
+    .card-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform $transition;
+    }
+
+    .card-hover-info {
+        background: rgba($secondary-color, .8);
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        visibility: hidden;
+        opacity: 0;
+        z-index: -2;
+        transition: all .5s cubic-bezier(0.075, 0.82, 0.165, 1);
+        cursor: pointer;
+
+        &::before {
+            content: 'Show on map';
+            @include center-position;
+            @include font-properties(1.2em, 600);
+            color: $text-color;
+            z-index: 3;
+        }
+
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+
+    &:hover {
+
+        .card-hover-info {
+            visibility: visible;
+            opacity: 1;
+            z-index: 2;
+        }   
+
+        .card-img {
+            transform: scale(1.05);
+        }
+    }
+}
+
+.card-desc,
+.card-address,
+.card-city {
+    margin: 0;
+    line-height: normal;
+    text-align: left;
+
+}
+
+.card-name {
+    @include link-properties;
+    @include font-properties(1.1em, 600);
+    color: $text-color-dark;
+    transition: color $transition;
+
+    &:hover {
+        color: $secondary-color;
+    }
+}
+
+.card-address {
+    margin-top: 10px;
+}
+
+.fa-location-dot {
+    color: $secondary-color;
+    margin-right: 2px;
+}
+
+.fa-store-slash {
+    color: rgba($secondary-color, .4);
+    font-size: 10em;
+    margin-top: 40px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+// MAP MODAL ===========================================
+
+.map-modal-container {
+    position: relative;
+    z-index: 50;
+    transition: all .5s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.map-modal-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 0;
+}
+
+.map-modal {
+    @include center-position;
+    position: fixed;
+    width: 80vw;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+}

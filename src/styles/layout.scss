@@ -1,0 +1,47 @@
+@use 'variables' as *;
+@use 'reset' as *;
+@use 'mixins' as *;
+
+// HEADER 
+
+header {
+    @include flex-row-center(space-between);
+    padding: $auto-padding-5;
+    .logo img {
+        width: 100px;
+    }
+
+    @media screen and (max-width: 675px) {
+        flex-direction: column;
+        margin-bottom: 30px;
+        .logo img {
+            width: 80px;
+        }
+        
+    }
+}
+
+.navbar {
+    @include flex-row-center;
+    gap: 20px;
+
+    li {
+        list-style: none;
+        border-color: transparent;
+        border-bottom: 2px solid transparent;
+        transition: border-color $transition;
+        
+        a {
+            @include link-properties;
+            color: $secondary-color;
+        }
+
+        &:hover {
+            border-color: $secondary-color;
+            
+        }
+    }
+}
+
+// FOOTER
+

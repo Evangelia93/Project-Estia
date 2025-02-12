@@ -1,3 +1,5 @@
+
+
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
 
 * {
@@ -18,7 +20,7 @@
 /*SORT BY*/
 
   /* Button styling */
-  .sort-by-button {
+  /* .sort-by-button {
     padding: 0;
     ;
     color: white;
@@ -28,7 +30,7 @@
     border-radius: 5px;
     cursor: pointer;
     transition: all 0.3s ease;
-  }
+  } */
 
   /* Popup content styling */
 
@@ -70,7 +72,7 @@
   }
   
   /* Close button styling */
-  .popup-content .close-button {
+  /* .popup-content .close-button {
     margin-top: 15px;
     padding: 10px 20px;
     background-color: #93B795;
@@ -80,35 +82,9 @@
     cursor: pointer;
     
   }
-  
+   */
   .popup-content .close-button:hover {
     background-color: #769f7d;
-  }
-  .modal {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-
-
-  }
-  
-  .modal-content {
-    background-color: #ffcfcf; 
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    border-radius: 10px;
-    width: 80%; 
-    max-width: 400px; 
-    text-align: center;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
   }
   
   .close {
@@ -126,7 +102,7 @@
     cursor: pointer;
   }
   
-  button {
+  /* button {
     background-color: #93B795;
     border: none;
     color: white;
@@ -138,11 +114,11 @@
     margin: 10px 2px;
     cursor: pointer;
     border-radius: 5px;
-  }
+  } */
   
-  button:hover {
+  /* button:hover {
     background-color:  #769f7d;
-  }
+  } */
   
   hr {
     margin: 20px 0;
@@ -207,20 +183,6 @@
 
   /*FILTER POP UP CONTAINER*/
 
-  .modal {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
-  }
-  
   .modal-content {
     background-color: #ffcfcf; 
     padding:20px;
@@ -314,7 +276,7 @@
 
 /* SearchBox Styles */
 
-.searchbox-wrapper {
+/* .searchbox-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -358,7 +320,7 @@
 .searchbox-submit-button:hover {
   background-color: #769f7d;
   transform: scale(1.05);
-}
+} */
 
 /*Filters*/
 .filter-sort-container {
@@ -367,7 +329,7 @@
   justify-content: center; 
 }
 
-.filter-button,
+/* .filter-button,
 .sort-button {
   background-color: #93B795;
   color: white;
@@ -380,13 +342,13 @@
   transition: background-color 0.3s ease, transform 0.2s ease;
   min-width: 160px; 
   text-align: center;
-}
+} */
 
-.filter-button:hover,
+/* .filter-button:hover,
 .sort-button:hover {
   background-color: #769f7d;
   transform: scale(1.1); 
-}
+} */
 
 /* Popular Categories Container */
 .popular-categories-container {
@@ -460,18 +422,24 @@ category-image:hover {
 }
 /* ABOUT US */
 .about-us-container {
-  padding: 40px;
+  padding-bottom: 60px;
   border-radius: 15px;
   max-width: 800px;
   margin: 40px auto; 
   font-family: 'Quicksand', sans-serif; 
-  text-align: center;
+  text-align: left;
 }
 
 .about-us-title {
   font-size: 2.5rem;
   color: #4a4a4a; 
   margin-bottom: 20px;
+  text-align: center;
+  border-bottom: 4px solid #93b795;
+  width: fit-content;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .about-us-paragraph {
@@ -646,12 +614,7 @@ category-image:hover {
   flex: 1;
 }
 
-.business-content h2 {
-  margin: 0;
-  font-size: 18px;
-  font-weight: bold;
-  color: #333;
-}
+
 
 .business-content p {
   margin: 5px 0;
@@ -724,10 +687,6 @@ category-image:hover {
   object-fit: cover;
 }
 
-.business-content h2 {
-  font-size: 16px;
-  margin: 0;
-}
 
 .business-content p {
   font-size: 14px;
@@ -745,7 +704,7 @@ category-image:hover {
 /*--------------------------------------------------*/
 /*Nav bar*/
 /* HEADER */
-.navbar {
+/* .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -837,7 +796,7 @@ category-image:hover {
 
   .navbar-logo img {
     height: 150px; 
-}}
+}} */
 .reviews-container {
   margin-top: 15px;
   max-height: 200px;

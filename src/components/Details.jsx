@@ -1,76 +1,133 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { fetchAddresses, fetchBusinesses } from '../api/businesses';
+import '../styles/home.scss'
+import { Link, useLocation } from 'react-router-dom';
+import 'leaflet/dist/leaflet.css';
 import Map from './Map';
-import HeartButton from './HeartButton';
-import StarButton from './StarButton';
-import img1 from '../assets/cafe_spots/1.jpeg';
-import img2 from '../assets/cafe_spots/2.jpeg';
-import img3 from '../assets/cafe_spots/3.jpeg';
-import img4 from '../assets/cafe_spots/4.jpeg';
-import img5 from '../assets/cafe_spots/5.jpeg';
-import img6 from '../assets/cafe_spots/6.jpeg';
-import img7 from '../assets/cafe_spots/7.jpeg';
-import img8 from '../assets/cafe_spots/8.jpeg';
-import img9 from '../assets/cafe_spots/9.jpeg';
-import img10 from '../assets/cafe_spots/10.jpeg';
-import img11 from '../assets/cafe_spots/11.jpeg';
-import img12 from '../assets/cafe_spots/12.jpeg';
-const images = [img1, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11, img12];
-function Details({ combinedData }) {
-  const [currentIndex, setCurrentIndex] = useState(null);
+import SearchBox from './SearchBox';
+import Modal from './Modal';
 
-  const businessesWithImages = combinedData.map((business, index) => ({
-    ...business,
-    imageUrl: images[index % images.length], 
-  }));
+
+
+function Details() {
+  const [addresses, setAddresses] = useState([]);
+  const [filteredAddresses, setFilteredAddresses] = useState([]);
+
+  const [longitude, setLongitude] = useState(0)
+  const [lattitude, setLatitude] = useState(0)
+  const [street, setStreet] = useState('')
+  const [isMapActive, setIsMapActive] = useState(false)
+
+  const [isLoading, setIsLoading] = useState(false)
+
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const searchTerm = queryParams.get("search")?.toLowerCase() || "";
+
+  const seedLocation = (long, lat, address) => {
+    setLongitude(long)
+    setLatitude(lat)
+    setStreet(address)
+
+    toggleModal();
+  }
+
+  const toggleModal = () => {
+    setIsMapActive(!isMapActive)
+
+    if (!isMapActive) {
+      document.documentElement.classList.add('no-scroll');
+    } else {
+      document.documentElement.classList.remove('no-scroll');
+    }
+  }
+
+  const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);;
+
+  const toggleFilterModal = () => {
+    setIsFilterModalOpen((prev) => !prev);
+  };
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      const addresses = await fetchBusinesses();
+      setFilteredAddresses(addresses)
+      if (searchTerm.trim()) {
+        setFilteredAddresses(addresses.filter((address) =>
+          address.name.toLowerCase().includes(searchTerm)
+        ));
+      }
+      setIsLoading(false);
+      console.log('ADRESSES: ', addresses);
+
+    }
+
+    fetchData();
+  }, [searchTerm])
+
+ if (isLoading) {
+  return (
+    <>
+      <SearchBox onClick={toggleFilterModal} />
+      <p>Loading...</p>
+    </>
+  )
+ }  
+
+  if (!filteredAddresses || filteredAddresses.length == 0) {
+    return (
+      <>
+        <SearchBox onClick={toggleFilterModal} />
+        <i class="fa-solid fa-store-slash"></i>
+        <p>No results</p>
+      </>
+    )
+  }
 
   return (
-    <div className="content-container">
-      <div className="left-content">
-        <div className="businesses-container">
-          {businessesWithImages.map((business, index) => (
-            <div
-              key={index}
-              className="business-card"
-              onClick={() => setCurrentIndex(index)}
-            >
-              <img
-                src={business.imageUrl}
-                alt={business.name}
-                className="business-image"
-              />
-              <div className="business-content">
-                <h2>{business.name}</h2>
-                <p>{business.description || "No description available"}</p>
-                <p>
-                  <b>Address:</b> {business.road_name}, {business.city}
-                </p>
+    <>
+      <SearchBox onClick={toggleFilterModal} />
+      <Modal />
+      <div className="addresses-wrapper">
+        <div className="addresses-container">
+          {filteredAddresses.map((address) => (
+            <div key={address.id} className="addresses-card">
+              <div className="card-img-container" onClick={() => seedLocation(
+                address.longitude,
+                address.latitude,
+                `${address.number}, ${address.road_name}, ${address.postal_code} ${address.city}`)}>
+                <div className="card-hover-info"></div>
+                <img className='card-img' src={address.image_path} alt="" />
               </div>
-              <div className="button-container">
-                <HeartButton business={business} />
-                <StarButton business={business} />
+              <div className="card-infos-container">
+                <Link className="card-name"
+                  onClick={() =>
+                    seedLocation(
+                      address.longitude,
+                      address.latitude,
+                      `${address.number}, ${address.road_name}, ${address.postal_code} ${address.city}`)}>{address.name}</Link>
+                <p className="card-address">
+                  <i className="fa-solid fa-location-dot"></i> {`${address.number}, ${address.road_name}`}</p>
+                <p className="card-city">
+                  {`${address.postal_code}, ${address.city}`}</p>
               </div>
             </div>
           ))}
         </div>
       </div>
-      <div className="right-content">
-        {!!combinedData && (
-          <Map
-            selectedLocation={
-              currentIndex !== null
-                ? [
-                    combinedData[currentIndex].latitude,
-                    combinedData[currentIndex].longitude,
-                  ]
-                : null
-            }
-            setCurrentIndex={setCurrentIndex}
-            combinedData={combinedData}
-          />
-        )}
-      </div>
-    </div>
-  );
+
+      {isMapActive ?
+        <div className="map-modal-container">
+          <div className="map-modal-bg" onClick={() => toggleModal()}></div>
+          <div className="map-modal">
+            <Map longitude={longitude} latitude={lattitude} street={street} />
+          </div>
+        </div> : null}
+    </>
+
+  )
 }
 
 export default Details;

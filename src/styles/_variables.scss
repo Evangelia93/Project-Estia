@@ -1,0 +1,32 @@
+
+
+// FONT
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+$font-quicksand: 'Quicksand', sans-serif;
+
+// PADDING
+
+$contentWidth: 1200px;
+$auto-padding-5: 5px max(2rem, 50vw - $contentWidth / 2);
+
+// BORDER RADIUS
+
+$border-radius-05: 5px;
+$border-radius-10: 10px;
+$border-radius-20: 20px;
+$border-radius-50: 50px;
+$border-radius-100: 100px;
+
+// COLORS
+
+$text-color: #fefefe;
+$text-color-dark: #4a4a4a;
+$secondary-color: #93B795;
+$background-color: #FFFDEC;
+$background-white-color: #fefefe;
+$background-dark-color: #4a4a4a;
+
+
+// TRANSITIONS
+
+$transition: 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);

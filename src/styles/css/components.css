@@ -1,0 +1,213 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
+.button {
+  text-decoration: none;
+  color: #fefefe;
+  font-weight: 500;
+  font-size: 1em;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background: #93B795;
+  border: none;
+  cursor: pointer;
+}
+
+.button-modal {
+  text-decoration: none;
+  color: #fefefe;
+  font-weight: 500;
+  font-size: 1em;
+  padding: 5px 15px;
+  border-radius: 50px;
+  background: #fefefe;
+  border: none;
+  cursor: pointer;
+  color: #93B795;
+  font-size: 0.9em;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.button-modal:hover {
+  border-color: #93B795;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #93B795;
+  width: 100%;
+}
+
+.searchbox-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  gap: 10px;
+  background: #FFFDEC;
+}
+.searchbox-wrapper .searchbox-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 0;
+  padding-left: 20px;
+  padding-right: 5px;
+  gap: 10px;
+  background: white;
+  border-radius: 50px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+.searchbox-wrapper input {
+  width: 40vw;
+  border: none;
+  transition: width 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.searchbox-wrapper input:focus {
+  width: 50vw;
+  outline: none;
+}
+@media screen and (max-width: 675px) {
+  .searchbox-wrapper input {
+    width: 60vw;
+  }
+}
+.searchbox-wrapper button {
+  text-decoration: none;
+  color: #fefefe;
+  font-weight: 500;
+  font-size: 1em;
+  width: 40px;
+  padding: 10px;
+  border-radius: 50px;
+  background: #93B795;
+}
+
+.searchbox-separator {
+  margin: 0 auto;
+  width: 100%;
+  margin: 20px 0;
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: fixed;
+  z-index: 1050;
+  display: none;
+}
+.modal.active {
+  display: block;
+}
+
+.modal-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 1020;
+}
+
+.modal-wrapper {
+  padding: 20px 0;
+  width: 500px;
+  border-radius: 10px;
+  background: #fefefe;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+}
+.modal-wrapper h3,
+.modal-wrapper .reset-apply-button-container {
+  padding: 0 20px;
+}
+.modal-wrapper .reset-apply-button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-container {
+  padding: 20px;
+}
+.modal-container label {
+  color: #4a4a4a;
+  font-size: 1.1em;
+  font-weight: 600;
+}
+.modal-container .buttons-container {
+  display: flex;
+  flex-direction: row;
+  margin: 20px 0;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.modal-container button.selected {
+  background: #93B795;
+  color: #fefefe;
+}
+.modal-container select {
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: #fefefe;
+  color: #4a4a4a;
+  font-weight: 500;
+}
+.modal-container select:focus {
+  outline: none;
+}
+
+.login-signup-modal {
+  width: 300px;
+}
+
+.login-form,
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.login-form h2,
+.signup-form h2 {
+  margin-bottom: 20px;
+}
+.login-form input,
+.signup-form input {
+  width: 200px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: width 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+  margin: 5px 0;
+}
+.login-form input:focus,
+.signup-form input:focus {
+  outline-color: #93B795;
+}
+.login-form button,
+.signup-form button {
+  margin-top: 20px;
+}
+.login-form a,
+.signup-form a {
+  text-decoration: none;
+  color: #fefefe;
+  font-weight: 500;
+  font-size: 1em;
+  color: #93B795;
+}
+
+.login-signup-button::before {
+  content: "Login / Sign Up";
+}
+
+@media screen and (max-width: 675px) {
+  .login-signup-button::before {
+    content: "\f007";
+    font-family: FontAwesome;
+  }
+}/*# sourceMappingURL=components.css.map */

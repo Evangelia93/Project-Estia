@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import "reactjs-popup/dist/index.css";
-import "../styles/modal.css";
 import FilterModal from "./FilterModal";
-import SortBy from "./SortBy";
 import { useNavigate } from "react-router-dom";
+import SortBy from "./SortBy";
 
 function SearchBox() {
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
@@ -33,32 +32,27 @@ function SearchBox() {
       }
     });
 
-    navigate(`/listcontainer?${queryParams.toString()}`);
+    navigate(`/search/?${queryParams.toString()}`);
   };
 
   return (
-    <div className="searchbox-wrapper">
-      <div className="searchbox-container">
-        <input
-          type="text"
-          className="searchbox-input"
-          placeholder="Search..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && handleSearch()}        />
-        <button className="searchbox-submit-button" onClick={handleSearch}>
-          Submit
-        </button>
+    <>
+      <div className="searchbox-wrapper">
+        <div className="searchbox-container">
+          <input
+            type="text"
+            className="searchbox-input"
+            placeholder="Search..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && handleSearch()} />
+          <button type="submit" className="searchbox-submit button" onClick={handleSearch}>
+            <i className="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </div>
       </div>
-
-      <div className="filter-sort-container">
-        <button className="filter-button" onClick={toggleFilterModal}>
-          Filters
-        </button>
-        <button className="sort-button" onClick={toggleSortByModal}>
-          Sort By
-        </button>
-      </div>
+      
+      <hr className="searchbox-separator"/>
 
       {isFilterModalOpen && (
         <FilterModal
@@ -79,7 +73,7 @@ function SearchBox() {
           }}
         />
       )}
-    </div>
+    </>
   );
 }
 

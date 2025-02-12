@@ -1,0 +1,202 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+// GENERAL ======================================================================
+
+.button {
+    @include button-properties;
+}
+
+.button-modal {
+    @include button-properties(5px 15px, $border-radius-50, $background-white-color);
+    color: $secondary-color;;
+    font-size: .9em;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    transition: border-color $transition;
+    &:hover {
+        border-color: $secondary-color;
+    }
+}
+
+hr {
+    border: none;
+    border-top: 1px solid $secondary-color;
+    width: 100%;
+}
+
+// SEARCHBOX ======================================================================
+
+.searchbox-wrapper {
+    @include flex-row-center;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    gap: 10px;
+    background: $background-color;
+
+    .searchbox-container {
+        @include flex-row-center;
+        padding: 5px 0;
+        padding-left: 20px;
+        padding-right: 5px;
+        gap: 10px;
+        background: white;
+        border-radius: $border-radius-50;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+
+    }
+    input {
+        width: 40vw;
+        border: none;
+        transition: width $transition;
+
+        &:focus {
+            width: 50vw;
+            outline: none;
+        }
+
+        @media screen and (max-width: 675px) {
+            width: 60vw;
+        }
+    }
+    button {
+        @include link-properties;
+        width: 40px;
+        padding: 10px;
+        border-radius: $border-radius-50;
+        background: $secondary-color;
+
+    }
+}
+
+.searchbox-separator {
+    @include center-margin (100%);
+    margin: 20px 0;
+}
+
+// MODAL ======================================================================
+
+.modal {
+    @include center-position;
+    position: fixed;
+    z-index: 1050;
+    display: none;
+
+    &.active {
+        display: block;
+    }
+}
+
+.modal-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 1020;
+}
+
+.modal-wrapper {
+    padding: 20px 0;
+    width: 500px;
+    border-radius: $border-radius-10;
+    background: $background-white-color;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+
+    h3,
+    .reset-apply-button-container {
+        padding: 0 20px;
+    } 
+
+    .reset-apply-button-container {
+        @include flex-row-center(space-between);
+    }
+}
+
+.modal-container {
+    padding: 20px;
+
+    label {
+        color: $text-color-dark;
+        font-size: 1.1em;
+        font-weight: 600;
+    }
+
+    .buttons-container {
+        @include flex-row;
+        margin: 20px 0;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    button {
+        &.selected {
+            background: $secondary-color;
+            color: $background-white-color;
+        }
+    }
+
+    select {
+
+        padding: 5px 10px;
+        border-radius: $border-radius-05;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        background: $background-white-color;
+        color: $text-color-dark;
+        font-weight: 500;
+
+        &:focus {
+            outline: none;
+        }
+    }
+}
+
+// LOGIN/SIGNUP ======================================================================
+
+.login-signup-modal {
+    width: 300px;
+}
+
+.login-form,
+.signup-form{
+    @include flex-column-center;
+
+    h2 {
+        margin-bottom: 20px;
+    }
+
+    input {
+        width: 200px;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        padding: 5px 10px;
+        border-radius: $border-radius-05;
+        transition: width $transition;
+        margin: 5px 0;
+
+        &:focus {
+            outline-color: $secondary-color;
+        }
+    }
+
+    button {
+        margin-top: 20px;
+    }
+
+    a {
+        @include link-properties;
+        color: $secondary-color;
+    }
+}
+
+.login-signup-button::before {
+    content: 'Login / Sign Up';
+}
+
+@media  screen and (max-width: 675px) {
+    .login-signup-button::before {
+        content: '\f007';
+        font-family: FontAwesome;
+    }
+    
+}

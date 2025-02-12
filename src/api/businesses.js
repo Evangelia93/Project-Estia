@@ -3,10 +3,14 @@ const API_BASE_URL = 'https://estiaproject-b3ef95234cdd.herokuapp.com/api/v1';
 
 export const fetchBusinesses = async () => {
     try {
-      const response = await fetch(`${API_BASE_URL}/business/`);
+      const response = await fetch(`${API_BASE_URL}/business/all`);
       if (!response.ok) throw new Error('Failed to fetch businesses');
       const data = await response.json();
-      return data;
+
+
+        return data;
+
+
     } catch (error) {
       console.error('Error fetching businesses:', error);
       return [];
@@ -15,6 +19,7 @@ export const fetchBusinesses = async () => {
 
 export const fetchAddresses = async () => {
   const response = await fetch(`${API_BASE_URL}/address/`);
+  console.log(response)
   return response.json();
 };
 

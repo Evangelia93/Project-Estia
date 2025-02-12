@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import axios from 'axios';
-import './SignIn.module.css';  
+import "../styles/components.scss"
 
 
 export default function SignIn() {
@@ -13,6 +13,7 @@ export default function SignIn() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
+  const [token, setToken] = useState('')
 
   // Handle Login
   const handleLogin = async (e) => {
@@ -30,14 +31,20 @@ export default function SignIn() {
         email,
         password,
       });
+      
       console.log('Login successful:', response.data);
+      setToken(response.data.token);
+
       setSuccessMessage('Login successful!');
       setError('');
     } catch (err) {
       console.error('Login error:', err);
       setError(err.response?.data?.error || 'Unknown Error');
       setSuccessMessage('');
+    } finally {
+      token ? window.localStorage.setItem('token', token) : ''; 
     }
+    
   };
 
   // Handle Sign Up
@@ -86,39 +93,35 @@ export default function SignIn() {
   return (
 
     <Popup
-      trigger={<button className="navButton">Login / Sign Up</button>}
+      trigger={<button className="button login-signup-button"></button>}
       modal
       nested
     >
       {close => (
-        <div className="modal-content small-modal">
+        <div className="modal " style={{display: 'flex'}}>
           <span className="close" onClick={close}>&times;</span>
-          <div className="form-container">
-            <div className="form-toggle">
-              <button className={isLogin ? 'active' : ""} onClick={() => setIsLogin(true)}>Login</button>
-              <button className={!isLogin ? 'active' : ""} onClick={() => setIsLogin(false)}>Sign Up</button>
-            </div>
+          <div className="modal-wrapper login-signup-modal">
 
             {isLogin ? (
-              <div className="form">
-                <h2>Login Form</h2>
+              <div className="login-form">
+                <h2>Login</h2>
                 <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
                 <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
                 {error && <p style={{ color: 'red' }}>{error}</p>}
                 {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
-                <button onClick={handleLogin}>Login</button>
+                <button className="button" onClick={handleLogin}>Login</button>
                 <p>Not a Member? <a href="#" onClick={() => setIsLogin(false)}>Sign up now</a></p>
               </div>
             ) : (
-              <div className="form">
-                <h2>Sign Up Form</h2>
+              <div className="signup-form">
+                <h2>Sign Up</h2>
                 <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
                 <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
                 <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
                 <input type="password" placeholder="Confirm Password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
                 {error && <p style={{ color: 'red' }}>{error}</p>}
                 {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
-                <button onClick={handleSignUp}>Sign Up</button>
+                <button className="button" onClick={handleSignUp}>Sign Up</button>
                 <p>Already a member? <a href="#" onClick={() => setIsLogin(true)}>Login now</a></p>
               </div>
             )}

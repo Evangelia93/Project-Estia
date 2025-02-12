@@ -4,11 +4,10 @@ import SearchBox from "../components/SearchBox.jsx";
 import PopularCategories from "../components/PopularCategories.jsx";
 import Details from "../components/Details.jsx";
 import "../styles/styles.css";
+import Modal from "../components/Modal.jsx";
 
 
 function Home({ businessData }) {
-  
-  console.log("Business Data:", businessData);
 
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
   const [feedbackMessage, setFeedbackMessage] = useState("");
@@ -17,27 +16,12 @@ function Home({ businessData }) {
     setIsFilterModalOpen((prev) => !prev);
   };
 
-  const handleApplyFilters = () => {
-    setFeedbackMessage("Filters applied!");
-    setTimeout(() => setFeedbackMessage(""), 3000);
-    toggleFilterModal();
-  };
-
   return (
     <div>
-      <SearchBox onClick={toggleFilterModal} />
-      <PopularCategories />
       {businessData && businessData.length > 0 ? (
-        <Details combinedData={businessData} />
+        <Details />
       ) : (
         <p>No businesses found</p>
-      )}
-
-      {isFilterModalOpen && (
-        <FilterModal
-          onClose={toggleFilterModal}
-          onApply={handleApplyFilters}
-        />
       )}
 
       {feedbackMessage && (

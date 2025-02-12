@@ -73,21 +73,16 @@ body {
 }
 
 /* Input Fields */
-input {
+/* input {
   padding: 12px;
   margin: 10px 0;
   border: 1px solid #ccc;
   border-radius: 30px;
   width: 100%;
   font-size: 16px;
-}
+} */
 
 /* Form Elements */
-h2 {
-  color: #93B795;
-  font-size: 24px;
-  margin-bottom: 20px;
-}
 
 /* Submit Button */
 button.submit-button {
