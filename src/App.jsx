@@ -13,6 +13,9 @@ import AuthForm from './styles/old/SignIn.module.css'
 import Header from './components/Header/Header';
 import Business from './components/Business/Business';
 import Details from './components/Details';
+import AddBusiness from './components/Business/AddBusiness';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Layout() {
   return (
@@ -32,7 +35,7 @@ function App() {
 
   const combinedData = useMemo(() => {
     if (!businessData || !businessAddreses) return [];
-    
+
     return businessData.map((business) => {
       const address = businessAddreses.find(
         (addr) => addr.id === business.id_address
@@ -43,9 +46,9 @@ function App() {
         ...business,
         ...address,
       };
-    }).filter(item => 
-      item && 
-      typeof item.latitude === 'number' && 
+    }).filter(item =>
+      item &&
+      typeof item.latitude === 'number' &&
       typeof item.longitude === 'number'
     );
   }, [businessAddreses, businessData]);
@@ -68,9 +71,27 @@ function App() {
           <Route path="popularcategories" element={<PopularCategories combinedData={combinedData} />} />
           <Route path="search" element={<Details />} />
           <Route path="signin" element={<AuthForm />} /> {/* Updated to use AuthForm */}
-          <Route path="business" element={<Business />} /> 
+          <Route path="business" element={<AddBusiness />} />
         </Route>
       </Routes>
+
+      {/* Global Toast Container */}
+      <ToastContainer
+        position="bottom-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        style={{
+          bottom: '20px',
+          right: '20px'
+        }}
+      />
     </BrowserRouter>
   );
 }
