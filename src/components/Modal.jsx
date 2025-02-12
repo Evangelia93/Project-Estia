@@ -79,7 +79,7 @@ export default function Modal() {
 
                     <div className="reset-apply-button-container">
                         <button onClick={() => setSelectedButtons([])} className="button reset">Reset</button>
-                        <button className="button apply">Apply</button>
+                        <button  onClick={toggleModal} className="button apply">Apply</button>
                     </div>
                 </div>
             </div>
