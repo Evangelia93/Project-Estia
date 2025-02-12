@@ -16,8 +16,9 @@ function Details() {
   const [longitude, setLongitude] = useState(0)
   const [lattitude, setLatitude] = useState(0)
   const [street, setStreet] = useState('')
-
   const [isMapActive, setIsMapActive] = useState(false)
+
+  const [isLoading, setIsLoading] = useState(false)
 
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -50,18 +51,30 @@ function Details() {
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true);
       const addresses = await fetchBusinesses();
       setFilteredAddresses(addresses)
       if (searchTerm.trim()) {
         setFilteredAddresses(addresses.filter((address) =>
           address.name.toLowerCase().includes(searchTerm)
         ));
-      } 
+      }
+      setIsLoading(false);
       console.log('ADRESSES: ', addresses);
+
     }
 
     fetchData();
   }, [searchTerm])
+
+ if (isLoading) {
+  return (
+    <>
+      <SearchBox onClick={toggleFilterModal} />
+      <p>Loading...</p>
+    </>
+  )
+ }  
 
   if (!filteredAddresses || filteredAddresses.length == 0) {
     return (
